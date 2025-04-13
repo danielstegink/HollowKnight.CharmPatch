@@ -48,7 +48,7 @@ namespace CharmPatch.Charm_Patches
 
                 if (nailArtNames.Contains(attackName))
                 {
-                    double bonusPercent = 0.30;
+                    double bonusPercent = 0.40;
                     int bonusDamage = (int)(hitInstance.DamageDealt * bonusPercent);
                     //SharedData.Log($"{attackName}: {hitInstance.DamageDealt} damage increased by {bonusDamage}");
 

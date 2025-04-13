@@ -1,17 +1,12 @@
-﻿using HutongGames.PlayMaker;
-using Modding;
-using SFCore.Utils;
-using System;
+﻿using Modding;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using UnityEngine;
 
 namespace CharmPatch
 {
     public class CharmPatch : Mod, IMenuMod, IGlobalSettings<GlobalSettings>
     {
-        public override string GetVersion() => "1.2.0.0";
+        public override string GetVersion() => "1.2.0.1";
 
         public void OnLoadGlobal(GlobalSettings s)
         {

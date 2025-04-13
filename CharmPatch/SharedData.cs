@@ -20,6 +20,7 @@ namespace CharmPatch
             new JonisKindness(),
             new MantisArts(),
             new MercifulMelody(),
+            new QuickArts(),
         };
 
         /// <summary>

@@ -68,6 +68,14 @@ namespace CharmPatch
                     Saver = value => SharedData.globalSettings.mercifulMelodyOn = Convert.ToBoolean(value),
                     Loader = () => Convert.ToInt32(SharedData.globalSettings.mercifulMelodyOn)
                 },
+                new IMenuMod.MenuEntry()
+                {
+                    Name = "Quick Arts",
+                    Description = "Nail Art charge time reduced when Quick Slash is equipped",
+                    Values = MenuValues(),
+                    Saver = value => SharedData.globalSettings.quickArtsOn = Convert.ToBoolean(value),
+                    Loader = () => Convert.ToInt32(SharedData.globalSettings.quickArtsOn)
+                },
             };
 
             return menuOptions;
