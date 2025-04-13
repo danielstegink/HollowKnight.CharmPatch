@@ -11,7 +11,7 @@ namespace CharmPatch
 {
     public class CharmPatch : Mod, IMenuMod, IGlobalSettings<GlobalSettings>
     {
-        public override string GetVersion() => "1.1.0.0";
+        public override string GetVersion() => "1.2.0.0";
 
         public void OnLoadGlobal(GlobalSettings s)
         {
