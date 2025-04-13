@@ -19,9 +19,13 @@ in addition to regular ones.
 WARNING: I couldn't figure out how to manipulate the Lifeblood healing process directly, so you won't actually see the regenerated Masks in your health bar.
 
 # Recommended Charm Changer Settings
+
 Set Dreamshield cost to 2
+
 Set Grimmchild Attack Cooldown to 1.33
+
 Set Baldur Shell Blocks to 6
+
 OPTIONAL - Instead of using Joni's Kindness, you can set Joni's Blessing Health Increase to 60%
 
 # Special Thanks To
