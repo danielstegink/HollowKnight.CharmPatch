@@ -3,12 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\danie\\source\\repos\\Hollow Knight Mods\\HollowKnight.CharmPatch\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BA40716B-977B-4FB0-9B7B-18658031821F}|CharmPatch\\CharmPatch.csproj|c:\\users\\danie\\source\\repos\\hollow knight mods\\hollowknight.charmpatch\\charmpatch\\readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
-      "RelativeMoniker": "D:0:0:{BA40716B-977B-4FB0-9B7B-18658031821F}|CharmPatch\\CharmPatch.csproj|solutionrelative:charmpatch\\readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+      "AbsoluteMoniker": "D:0:0:{BA40716B-977B-4FB0-9B7B-18658031821F}|CharmPatch\\CharmPatch.csproj|C:\\Users\\danie\\source\\repos\\Hollow Knight Mods\\HollowKnight.CharmPatch\\charmpatch\\charm patches\\criticalblow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA40716B-977B-4FB0-9B7B-18658031821F}|CharmPatch\\CharmPatch.csproj|solutionrelative:charmpatch\\charm patches\\criticalblow.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{BA40716B-977B-4FB0-9B7B-18658031821F}|CharmPatch\\CharmPatch.csproj|c:\\users\\danie\\source\\repos\\hollow knight mods\\hollowknight.charmpatch\\charmpatch\\charm patches\\mercifulmelody.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BA40716B-977B-4FB0-9B7B-18658031821F}|CharmPatch\\CharmPatch.csproj|solutionrelative:charmpatch\\charm patches\\mercifulmelody.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{BA40716B-977B-4FB0-9B7B-18658031821F}|CharmPatch\\CharmPatch.csproj|C:\\Users\\danie\\source\\repos\\Hollow Knight Mods\\HollowKnight.CharmPatch\\charmpatch\\charm patches\\mantisarts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA40716B-977B-4FB0-9B7B-18658031821F}|CharmPatch\\CharmPatch.csproj|solutionrelative:charmpatch\\charm patches\\mantisarts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{BA40716B-977B-4FB0-9B7B-18658031821F}|CharmPatch\\CharmPatch.csproj|C:\\Users\\danie\\source\\repos\\Hollow Knight Mods\\HollowKnight.CharmPatch\\charmpatch\\shareddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -26,33 +26,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 0,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "MercifulMelody.cs",
-              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\Hollow Knight Mods\\HollowKnight.CharmPatch\\CharmPatch\\Charm Patches\\MercifulMelody.cs",
-              "RelativeDocumentMoniker": "CharmPatch\\Charm Patches\\MercifulMelody.cs",
-              "ToolTip": "C:\\Users\\danie\\source\\repos\\Hollow Knight Mods\\HollowKnight.CharmPatch\\CharmPatch\\Charm Patches\\MercifulMelody.cs",
-              "RelativeToolTip": "CharmPatch\\Charm Patches\\MercifulMelody.cs",
-              "ViewState": "AQIAAAwAAAAAAAAAAAAAACEAAABOAAAA",
+              "DocumentIndex": 0,
+              "Title": "CriticalBlow.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\Hollow Knight Mods\\HollowKnight.CharmPatch\\CharmPatch\\Charm Patches\\CriticalBlow.cs",
+              "RelativeDocumentMoniker": "CharmPatch\\Charm Patches\\CriticalBlow.cs",
+              "ToolTip": "C:\\Users\\danie\\source\\repos\\Hollow Knight Mods\\HollowKnight.CharmPatch\\CharmPatch\\Charm Patches\\CriticalBlow.cs",
+              "RelativeToolTip": "CharmPatch\\Charm Patches\\CriticalBlow.cs",
+              "ViewState": "AQIAAAsAAAAAAAAAAAAxwB4AAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-21T23:38:21.107Z",
+              "WhenOpened": "2025-04-13T03:42:20.317Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "ReadMe.md",
-              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\Hollow Knight Mods\\HollowKnight.CharmPatch\\CharmPatch\\ReadMe.md",
-              "RelativeDocumentMoniker": "CharmPatch\\ReadMe.md",
-              "ToolTip": "C:\\Users\\danie\\source\\repos\\Hollow Knight Mods\\HollowKnight.CharmPatch\\CharmPatch\\ReadMe.md",
-              "RelativeToolTip": "CharmPatch\\ReadMe.md",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA8AAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
-              "WhenOpened": "2025-03-21T23:29:06.62Z",
-              "EditorCaption": ""
+              "DocumentIndex": 1,
+              "Title": "MantisArts.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\source\\repos\\Hollow Knight Mods\\HollowKnight.CharmPatch\\CharmPatch\\Charm Patches\\MantisArts.cs",
+              "RelativeDocumentMoniker": "CharmPatch\\Charm Patches\\MantisArts.cs",
+              "ToolTip": "C:\\Users\\danie\\source\\repos\\Hollow Knight Mods\\HollowKnight.CharmPatch\\CharmPatch\\Charm Patches\\MantisArts.cs",
+              "RelativeToolTip": "CharmPatch\\Charm Patches\\MantisArts.cs",
+              "ViewState": "AQIAAC0AAAAAAAAAAAAowAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-13T03:41:55.9Z"
             },
             {
               "$type": "Document",
@@ -62,9 +61,9 @@
               "RelativeDocumentMoniker": "CharmPatch\\SharedData.cs",
               "ToolTip": "C:\\Users\\danie\\source\\repos\\Hollow Knight Mods\\HollowKnight.CharmPatch\\CharmPatch\\SharedData.cs",
               "RelativeToolTip": "CharmPatch\\SharedData.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAA4AAAA0AAAA",
+              "ViewState": "AQIAAAEAAAAAAAAAAAAAAB8AAAAJAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-16T15:56:01.79Z"
+              "WhenOpened": "2025-04-11T04:38:33.358Z"
             },
             {
               "$type": "Document",
@@ -74,9 +73,9 @@
               "RelativeDocumentMoniker": "CharmPatch\\Mod Menu\\ModMenu.cs",
               "ToolTip": "C:\\Users\\danie\\source\\repos\\Hollow Knight Mods\\HollowKnight.CharmPatch\\CharmPatch\\Mod Menu\\ModMenu.cs",
               "RelativeToolTip": "CharmPatch\\Mod Menu\\ModMenu.cs",
-              "ViewState": "AQIAACEAAAAAAAAAAAAIwBYAAAAQAAAA",
+              "ViewState": "AQIAABwAAAAAAAAAAAAgwCEAAAArAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-02-16T15:55:04.292Z"
+              "WhenOpened": "2025-04-11T03:50:56.965Z"
             }
           ]
         }

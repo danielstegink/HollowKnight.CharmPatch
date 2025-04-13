@@ -10,11 +10,29 @@ Joni's Blessing gives more Lifeblood Masks.
 
 Carefree Melody has a chance to heal when triggered.
 
+Heavy Blow increases the damage dealt by Nail Arts.
+
+Longnail and Mark of Pride increase the range of Nail Arts
+
 Additionally, I added a compatibility patch so that TheMathGeek314's Unlimited Hiveblood mod heals Lifeblood Masks (including those not given by Joni's Blessing)
 in addition to regular ones. 
 WARNING: I couldn't figure out how to manipulate the Lifeblood healing process directly, so you won't actually see the regenerated Masks in your health bar.
 
+# Recommended Charm Changer Settings
+Set Dreamshield cost to 2
+Set Grimmchild Attack Cooldown to 1.33
+Set Baldur Shell Blocks to 6
+OPTIONAL - Instead of using Joni's Kindness, you can set Joni's Blessing Health Increase to 60%
+
+# Special Thanks To
+timbobaggins for the idea behind Critical Blow
+
 # Patch Notes
+1.2.0.0
+-	Added 2 new patches
+	-	Critical Blow increases the damage dealt by Nail Arts when Heavy Blow is equipped
+	-	Mantis Arts increases the range of Nail Arts when Longnail and Mark of Pride are equipped
+-	Fixed Dark Dashmaster so that if you turn it on/off, its effects take place immediately instead of when you update your charms
 1.1.0.0
 -	Added menu options so upgrades could be toggled. 
 -	Changed Dark Dashmaster's cooldown reduction from 33% to 40%

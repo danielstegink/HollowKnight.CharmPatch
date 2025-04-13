@@ -1,6 +1,5 @@
 ﻿using CharmPatch.Charm_Patches;
 using System.Collections.Generic;
-
 namespace CharmPatch
 {
     /// <summary>
@@ -16,8 +15,10 @@ namespace CharmPatch
         {
             new BerserkersFury(),
             new BlueHive(),
+            new CriticalBlow(),
             new DarkDashmaster(),
             new JonisKindness(),
+            new MantisArts(),
             new MercifulMelody(),
         };
 

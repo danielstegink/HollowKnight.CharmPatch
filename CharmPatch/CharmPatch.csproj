@@ -330,8 +330,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\README.md" Link="README.md" />
     <None Include=".gitignore" />
-    <None Include="ReadMe.md" />
     <None Include="Resources\.gitignore" />
   </ItemGroup>
 </Project>

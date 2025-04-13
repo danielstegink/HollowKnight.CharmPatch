@@ -30,6 +30,14 @@ namespace CharmPatch
                 },
                 new IMenuMod.MenuEntry()
                 {
+                    Name = "Critical Blow",
+                    Description = "Nail Art damage increased when Heavy Blow equipped",
+                    Values = MenuValues(),
+                    Saver = value => SharedData.globalSettings.criticalBlowOn = Convert.ToBoolean(value),
+                    Loader = () => Convert.ToInt32(SharedData.globalSettings.criticalBlowOn)
+                },
+                new IMenuMod.MenuEntry()
+                {
                     Name = "Dark Dashmaster",
                     Description = "Cooldown of Shadow Dash reduced when Dashmaster equipped",
                     Values = MenuValues(),
@@ -43,6 +51,14 @@ namespace CharmPatch
                     Values = MenuValues(),
                     Saver = value => SharedData.globalSettings.jonisKindnessOn = Convert.ToBoolean(value),
                     Loader = () => Convert.ToInt32(SharedData.globalSettings.jonisKindnessOn)
+                },
+                new IMenuMod.MenuEntry()
+                {
+                    Name = "Mantis Arts",
+                    Description = "Nail Art range increased when Longnail and/or Mark of Pride equipped",
+                    Values = MenuValues(),
+                    Saver = value => SharedData.globalSettings.mantisArtsOn = Convert.ToBoolean(value),
+                    Loader = () => Convert.ToInt32(SharedData.globalSettings.mantisArtsOn)
                 },
                 new IMenuMod.MenuEntry()
                 {

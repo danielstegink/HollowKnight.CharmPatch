@@ -1,4 +1,5 @@
 ﻿using Modding;
+using System;
 
 namespace CharmPatch.Charm_Patches
 {
@@ -6,44 +7,48 @@ namespace CharmPatch.Charm_Patches
     {
         public void AddHook()
         {
-            ModHooks.CharmUpdateHook += Start;
+            On.HeroController.Update += Start;
         }
 
         /// <summary>
-        /// Stores the original cooldown
+        /// Stores whether or not the patch has been applied
         /// </summary>
-        private float baseCooldown = 0f;
+        private bool patchApplied = false;
 
         /// <summary>
-        /// Reduces the cooldown of Shadow dash when Dashmaster is equipped
+        /// Dark Dashmaster reduces the cooldown of Shadow Dash when Dashmaster is equipped
         /// </summary>
-        /// <param name="data"></param>
-        /// <param name="controller"></param>
-        private void Start(PlayerData data, HeroController controller)
+        /// <param name="orig"></param>
+        /// <param name="self"></param>
+        private void Start(On.HeroController.orig_Update orig, HeroController self)
         {
-            // Buff once, and only if Dashmaster is equipped
-            if (SharedData.globalSettings.darkDashmasterOn &&
-                data.equippedCharm_31 && 
-                baseCooldown == 0)
-            {
-                baseCooldown = controller.SHADOW_DASH_COOLDOWN;
+            //SharedData.Log("Dark Dashmaster check");
 
-                // Dashmaster reduces normal dash cooldown by 33%
-                // NEW: Reduced by 40% to maintain base rate of 1 shadow dash per 3 regular dashes
-                float newCooldown = baseCooldown * 0.6f;
-                controller.SHADOW_DASH_COOLDOWN = newCooldown;
-                SharedData.Log($"Shadow dash: {baseCooldown} -> {newCooldown}");
+            // Dashmaster reduces normal dash cooldown by 33%
+            // NEW: Reduced by 40% to maintain base rate of 1 shadow dash per 3 regular dashes
+            float modifier = 0.6f;
+
+            // Buff once, and only if Dashmaster is equipped and Dark Dashmaster is enabled
+            if (SharedData.globalSettings.darkDashmasterOn &&
+                PlayerData.instance.equippedCharm_31 &&
+                !patchApplied)
+            {
+                self.SHADOW_DASH_COOLDOWN *= modifier;
+                //SharedData.Log($"Shadow dash cooldown set to {self.SHADOW_DASH_COOLDOWN}");
+                patchApplied = true;
             }
 
             // Make sure to reset if Dashmaster removed or patch disabled
-            if ((!data.equippedCharm_31 || !SharedData.globalSettings.darkDashmasterOn) && 
-                baseCooldown != 0)
+            if ((!self.playerData.equippedCharm_31 || !SharedData.globalSettings.darkDashmasterOn) &&
+                patchApplied)
             {
-                controller.SHADOW_DASH_COOLDOWN = baseCooldown;
-                SharedData.Log($"Shadow dash reset to {baseCooldown}");
+                self.SHADOW_DASH_COOLDOWN /= modifier;
+                //SharedData.Log($"Shadow dash reset to {self.SHADOW_DASH_COOLDOWN}");
 
-                baseCooldown = 0f;
+                patchApplied = false;
             }
+
+            orig(self);
         }
     }
 }
