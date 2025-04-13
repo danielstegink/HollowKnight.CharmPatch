@@ -38,6 +38,7 @@ timbobaggins for the idea behind Critical Blow
 1.2.0.1
 -	New patch Quick Arts reduces the charge time of Nail Arts when Quick Slash is equipped
 -	Critical Blow's damage buffed from 30% to 40%
+
 1.2.0.0
 -	Added 2 new patches
 	-	Critical Blow increases the damage dealt by Nail Arts when Heavy Blow is equipped
