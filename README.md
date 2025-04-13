@@ -14,6 +14,8 @@ Heavy Blow increases the damage dealt by Nail Arts.
 
 Longnail and Mark of Pride increase the range of Nail Arts.
 
+Quick Slash reduces the charge time of Nail Arts.
+
 Additionally, I added a compatibility patch so that TheMathGeek314's Unlimited Hiveblood mod heals Lifeblood Masks (including those not given by Joni's Blessing)
 in addition to regular ones. 
 
@@ -33,6 +35,9 @@ OPTIONAL - Instead of using Joni's Kindness, you can set Joni's Blessing Health 
 timbobaggins for the idea behind Critical Blow
 
 # Patch Notes
+1.2.0.1
+-	New patch Quick Arts reduces the charge time of Nail Arts when Quick Slash is equipped
+-	Critical Blow's damage buffed from 30% to 40%
 1.2.0.0
 -	Added 2 new patches
 	-	Critical Blow increases the damage dealt by Nail Arts when Heavy Blow is equipped

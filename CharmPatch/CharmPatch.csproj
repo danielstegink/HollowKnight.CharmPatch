@@ -330,7 +330,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\README.md" Link="README.md" />
     <None Include=".gitignore" />
     <None Include="Resources\.gitignore" />
   </ItemGroup>
