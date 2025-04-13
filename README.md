@@ -12,10 +12,11 @@ Carefree Melody has a chance to heal when triggered.
 
 Heavy Blow increases the damage dealt by Nail Arts.
 
-Longnail and Mark of Pride increase the range of Nail Arts
+Longnail and Mark of Pride increase the range of Nail Arts.
 
 Additionally, I added a compatibility patch so that TheMathGeek314's Unlimited Hiveblood mod heals Lifeblood Masks (including those not given by Joni's Blessing)
 in addition to regular ones. 
+
 WARNING: I couldn't figure out how to manipulate the Lifeblood healing process directly, so you won't actually see the regenerated Masks in your health bar.
 
 # Recommended Charm Changer Settings
@@ -37,6 +38,7 @@ timbobaggins for the idea behind Critical Blow
 	-	Critical Blow increases the damage dealt by Nail Arts when Heavy Blow is equipped
 	-	Mantis Arts increases the range of Nail Arts when Longnail and Mark of Pride are equipped
 -	Fixed Dark Dashmaster so that if you turn it on/off, its effects take place immediately instead of when you update your charms
+
 1.1.0.0
 -	Added menu options so upgrades could be toggled. 
 -	Changed Dark Dashmaster's cooldown reduction from 33% to 40%
