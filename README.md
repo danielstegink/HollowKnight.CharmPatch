@@ -14,6 +14,8 @@ Heavy Blow increases the damage dealt by Nail Arts.
 
 Longnail and Mark of Pride increase the range of Nail Arts.
 
+Baldur Shell absorbs more attacks before breaking.
+
 Quick Slash reduces the charge time of Nail Arts.
 
 Additionally, I added a compatibility patch so that TheMathGeek314's Unlimited Hiveblood mod heals Lifeblood Masks (including those not given by Joni's Blessing)
@@ -23,11 +25,11 @@ WARNING: I couldn't figure out how to manipulate the Lifeblood healing process d
 
 # Recommended Charm Changer Settings
 
+Set Flukenest cost to 2
+
 Set Dreamshield cost to 2
 
 Set Grimmchild Attack Cooldown to 1.33
-
-Set Baldur Shell Blocks to 6
 
 OPTIONAL - Instead of using Joni's Kindness, you can set Joni's Blessing Health Increase to 60%
 
@@ -35,6 +37,9 @@ OPTIONAL - Instead of using Joni's Kindness, you can set Joni's Blessing Health 
 timbobaggins for the idea behind Critical Blow
 
 # Patch Notes
+1.2.1.0
+-	Re-added Outer Shell. I misread that Charm Changer lets you add more than 4 hits; thank you timbobaggins for noticing this error.
+-	Added recommendation to reduce Flukenest cost to 2
 1.2.0.1
 -	New patch Quick Arts reduces the charge time of Nail Arts when Quick Slash is equipped
 -	Critical Blow's damage buffed from 30% to 40%

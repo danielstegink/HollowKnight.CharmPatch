@@ -70,6 +70,14 @@ namespace CharmPatch
                 },
                 new IMenuMod.MenuEntry()
                 {
+                    Name = "Outer Shell",
+                    Description = "Baldur Shell takes additional hits before breaking",
+                    Values = MenuValues(),
+                    Saver = value => SharedData.globalSettings.outerShellOn = Convert.ToBoolean(value),
+                    Loader = () => Convert.ToInt32(SharedData.globalSettings.outerShellOn)
+                },
+                new IMenuMod.MenuEntry()
+                {
                     Name = "Quick Arts",
                     Description = "Nail Art charge time reduced when Quick Slash is equipped",
                     Values = MenuValues(),

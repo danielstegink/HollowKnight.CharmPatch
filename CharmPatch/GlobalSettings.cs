@@ -9,6 +9,7 @@
         public bool jonisKindnessOn = true;
         public bool mantisArtsOn = true;
         public bool mercifulMelodyOn = true;
+        public bool outerShellOn = true;
         public bool quickArtsOn = true;
     }
 }
