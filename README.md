@@ -40,6 +40,7 @@ timbobaggins for the idea behind Critical Blow
 1.2.1.0
 -	Re-added Outer Shell. I misread that Charm Changer lets you add more than 4 hits; thank you timbobaggins for noticing this error.
 -	Added recommendation to reduce Flukenest cost to 2
+
 1.2.0.1
 -	New patch Quick Arts reduces the charge time of Nail Arts when Quick Slash is equipped
 -	Critical Blow's damage buffed from 30% to 40%
