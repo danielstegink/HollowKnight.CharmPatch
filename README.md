@@ -12,12 +12,12 @@ Merciful Melody - Carefree Melody has a chance to heal when triggered.
 
 Outer Shell - Baldur Shell absorbs more attacks before breaking.
 
-
+## Grubberfly's Elegy
 Grubberfly's Reach - Longnail and Marik of Pride increase the range of Grubberfly's Elegy
 
 Joni's Elegy - Grubberfly's Elegy always triggers when the player is at full health, even if they took damage while equipped with Joni's Blessing
 
-
+## Nail Arts
 Critical Blow - Heavy Blow increases damage dealt by Nail Arts.
 
 Mantis Arts - Longnail and Mark of Pride increase the range of Nail Arts.
@@ -49,7 +49,7 @@ timbobaggins for the idea behind Critical Blow
 1.3.0.0
 -	3 new patches
 	-	Grubberfly's Reach increases Grubberfly's Elegy range when Longnail and/or Mark of Pride are equipped
-	-	Joni's Elegy allows Grubberfly's Elegy to trigger after taking damage while Joni's Elegy is equipped, so long as the damage as healed
+	-	Joni's Elegy allows Grubberfly's Elegy to trigger after taking damage while Joni's Elegy is equipped, so long as the damage has healed
 	-	Mighty Arts increases the damage dealt by Nail Arts
 -	Rebalanced Quick Arts to further reduce the cooldown of Nail Arts by the same amount as regular nail strikes
 -	Reorganized menu to use a nested structure
