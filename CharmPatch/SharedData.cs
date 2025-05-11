@@ -14,14 +14,20 @@ namespace CharmPatch
         public static List<Charm_Patches.CharmPatch> charmPatches = new List<Charm_Patches.CharmPatch>()
         {
             new BerserkersFury(),
-            new BlueHive(),
-            new CriticalBlow(),
             new DarkDashmaster(),
             new JonisKindness(),
-            new MantisArts(),
-            new MercifulMelody(),
             new OuterShell(),
+            new MercifulMelody(),
+
+            new GrubberflysReach(),
+            new JonisElegy(),
+
+            new CriticalBlow(),
+            new MantisArts(),
+            new MightyArts(),
             new QuickArts(),
+
+            new BlueHive(),
         };
 
         /// <summary>

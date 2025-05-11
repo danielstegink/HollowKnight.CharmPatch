@@ -3,28 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\danie\\OneDrive\\Documents\\GitHub\\HollowKnight.CharmPatch\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{BA40716B-977B-4FB0-9B7B-18658031821F}|CharmPatch\\CharmPatch.csproj|C:\\Users\\danie\\OneDrive\\Documents\\GitHub\\HollowKnight.CharmPatch\\charmpatch\\charmpatch.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BA40716B-977B-4FB0-9B7B-18658031821F}|CharmPatch\\CharmPatch.csproj|solutionrelative:charmpatch\\charmpatch.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BA40716B-977B-4FB0-9B7B-18658031821F}|CharmPatch\\CharmPatch.csproj|c:\\users\\danie\\onedrive\\documents\\github\\hollowknight.charmpatch\\charmpatch\\shareddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BA40716B-977B-4FB0-9B7B-18658031821F}|CharmPatch\\CharmPatch.csproj|solutionrelative:charmpatch\\shareddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BA40716B-977B-4FB0-9B7B-18658031821F}|CharmPatch\\CharmPatch.csproj|C:\\Users\\danie\\OneDrive\\Documents\\GitHub\\HollowKnight.CharmPatch\\charmpatch\\charm patches\\quickarts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BA40716B-977B-4FB0-9B7B-18658031821F}|CharmPatch\\CharmPatch.csproj|solutionrelative:charmpatch\\charm patches\\quickarts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BA40716B-977B-4FB0-9B7B-18658031821F}|CharmPatch\\CharmPatch.csproj|c:\\users\\danie\\onedrive\\documents\\github\\hollowknight.charmpatch\\charmpatch\\charm patches\\mantisarts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BA40716B-977B-4FB0-9B7B-18658031821F}|CharmPatch\\CharmPatch.csproj|solutionrelative:charmpatch\\charm patches\\mantisarts.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{BA40716B-977B-4FB0-9B7B-18658031821F}|CharmPatch\\CharmPatch.csproj|c:\\users\\danie\\onedrive\\documents\\github\\hollowknight.charmpatch\\charmpatch\\charm patches\\outershell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{BA40716B-977B-4FB0-9B7B-18658031821F}|CharmPatch\\CharmPatch.csproj|solutionrelative:charmpatch\\charm patches\\outershell.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{BA40716B-977B-4FB0-9B7B-18658031821F}|CharmPatch\\CharmPatch.csproj|c:\\users\\danie\\onedrive\\documents\\github\\hollowknight.charmpatch\\readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}",
       "RelativeMoniker": "D:0:0:{BA40716B-977B-4FB0-9B7B-18658031821F}|CharmPatch\\CharmPatch.csproj|solutionrelative:readme.md||{EFC0BB08-EA7D-40C6-A696-C870411A895B}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BA40716B-977B-4FB0-9B7B-18658031821F}|CharmPatch\\CharmPatch.csproj|c:\\users\\danie\\onedrive\\documents\\github\\hollowknight.charmpatch\\charmpatch\\charm patches\\othermods\\bluehive.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BA40716B-977B-4FB0-9B7B-18658031821F}|CharmPatch\\CharmPatch.csproj|solutionrelative:charmpatch\\charm patches\\othermods\\bluehive.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -34,84 +18,32 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "SharedData.cs",
-              "DocumentMoniker": "C:\\Users\\danie\\OneDrive\\Documents\\GitHub\\HollowKnight.CharmPatch\\CharmPatch\\SharedData.cs",
-              "RelativeDocumentMoniker": "CharmPatch\\SharedData.cs",
-              "ToolTip": "C:\\Users\\danie\\OneDrive\\Documents\\GitHub\\HollowKnight.CharmPatch\\CharmPatch\\SharedData.cs",
-              "RelativeToolTip": "CharmPatch\\SharedData.cs",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAA0AAAAHAAAA",
+              "Title": "BlueHive.cs",
+              "DocumentMoniker": "C:\\Users\\danie\\OneDrive\\Documents\\GitHub\\HollowKnight.CharmPatch\\CharmPatch\\Charm Patches\\OtherMods\\BlueHive.cs",
+              "RelativeDocumentMoniker": "CharmPatch\\Charm Patches\\OtherMods\\BlueHive.cs",
+              "ToolTip": "C:\\Users\\danie\\OneDrive\\Documents\\GitHub\\HollowKnight.CharmPatch\\CharmPatch\\Charm Patches\\OtherMods\\BlueHive.cs",
+              "RelativeToolTip": "CharmPatch\\Charm Patches\\OtherMods\\BlueHive.cs",
+              "ViewState": "AQIAAD8AAAAAAAAAAAAowAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-15T02:14:19.942Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "MantisArts.cs",
-              "DocumentMoniker": "C:\\Users\\danie\\OneDrive\\Documents\\GitHub\\HollowKnight.CharmPatch\\CharmPatch\\Charm Patches\\MantisArts.cs",
-              "RelativeDocumentMoniker": "CharmPatch\\Charm Patches\\MantisArts.cs",
-              "ToolTip": "C:\\Users\\danie\\OneDrive\\Documents\\GitHub\\HollowKnight.CharmPatch\\CharmPatch\\Charm Patches\\MantisArts.cs",
-              "RelativeToolTip": "CharmPatch\\Charm Patches\\MantisArts.cs",
-              "ViewState": "AQIAAFkAAAAAAAAAAAAwwAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-15T02:11:07.231Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "OuterShell.cs",
-              "DocumentMoniker": "C:\\Users\\danie\\OneDrive\\Documents\\GitHub\\HollowKnight.CharmPatch\\CharmPatch\\Charm Patches\\OuterShell.cs",
-              "RelativeDocumentMoniker": "CharmPatch\\Charm Patches\\OuterShell.cs",
-              "ToolTip": "C:\\Users\\danie\\OneDrive\\Documents\\GitHub\\HollowKnight.CharmPatch\\CharmPatch\\Charm Patches\\OuterShell.cs",
-              "RelativeToolTip": "CharmPatch\\Charm Patches\\OuterShell.cs",
-              "ViewState": "AQIAAA0AAAAAAAAAAAAgwBsAAAAkAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-15T01:54:14.965Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "ReadMe.md",
-              "DocumentMoniker": "C:\\Users\\danie\\OneDrive\\Documents\\GitHub\\HollowKnight.CharmPatch\\ReadMe.md",
-              "RelativeDocumentMoniker": "ReadMe.md",
-              "ToolTip": "C:\\Users\\danie\\OneDrive\\Documents\\GitHub\\HollowKnight.CharmPatch\\ReadMe.md",
-              "RelativeToolTip": "ReadMe.md",
-              "ViewState": "AQIAAAMAAAAAAAAAAAAAABQAAABMAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
-              "WhenOpened": "2025-04-13T14:52:30.144Z",
+              "WhenOpened": "2025-05-11T22:02:54.873Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "CharmPatch.cs",
-              "DocumentMoniker": "C:\\Users\\danie\\OneDrive\\Documents\\GitHub\\HollowKnight.CharmPatch\\CharmPatch\\CharmPatch.cs",
-              "RelativeDocumentMoniker": "CharmPatch\\CharmPatch.cs",
-              "ToolTip": "C:\\Users\\danie\\OneDrive\\Documents\\GitHub\\HollowKnight.CharmPatch\\CharmPatch\\CharmPatch.cs",
-              "RelativeToolTip": "CharmPatch\\CharmPatch.cs",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAgAAAA3AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-13T14:28:42.371Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "QuickArts.cs",
-              "DocumentMoniker": "C:\\Users\\danie\\OneDrive\\Documents\\GitHub\\HollowKnight.CharmPatch\\CharmPatch\\Charm Patches\\QuickArts.cs",
-              "RelativeDocumentMoniker": "CharmPatch\\Charm Patches\\QuickArts.cs",
-              "ToolTip": "C:\\Users\\danie\\OneDrive\\Documents\\GitHub\\HollowKnight.CharmPatch\\CharmPatch\\Charm Patches\\QuickArts.cs",
-              "RelativeToolTip": "CharmPatch\\Charm Patches\\QuickArts.cs",
-              "ViewState": "AQIAABYAAAAAAAAAAAAAACEAAAA6AAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-13T14:07:34.899Z",
+              "Title": "ReadMe.md",
+              "DocumentMoniker": "C:\\Users\\danie\\OneDrive\\Documents\\GitHub\\HollowKnight.CharmPatch\\README.md",
+              "RelativeDocumentMoniker": "README.md",
+              "ToolTip": "C:\\Users\\danie\\OneDrive\\Documents\\GitHub\\HollowKnight.CharmPatch\\README.md",
+              "RelativeToolTip": "README.md",
+              "ViewState": "AQIAACoAAAAAAAAAAAAAADAAAAAHAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001818|",
+              "WhenOpened": "2025-05-11T21:52:55.673Z",
               "EditorCaption": ""
             }
           ]

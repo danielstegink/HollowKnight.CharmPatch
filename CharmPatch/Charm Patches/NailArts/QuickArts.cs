@@ -12,11 +12,18 @@
         /// </summary>
         private bool updated = false;
 
-        private float modifier = 0.85f;
+        /// <summary>
+        /// Quick Slash reduces the cooldown of nail strikes by 39%
+        /// </summary>
+        private float modifier = 0.61f;
 
+        /// <summary>
+        /// Quick Arts makes Quick Slash reduce the cooldown of nail arts
+        /// </summary>
+        /// <param name="orig"></param>
+        /// <param name="self"></param>
         private void Start(On.HeroController.orig_Update orig, HeroController self)
         {
-            // if not updated and quick slash equipped, reduce nail charge times by 15%
             if (SharedData.globalSettings.quickArtsOn && 
                 PlayerData.instance.equippedCharm_32 &&
                 !updated)
