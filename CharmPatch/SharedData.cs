@@ -11,6 +11,10 @@ namespace CharmPatch
 
         public static GlobalSettings globalSettings { get; set; } = new GlobalSettings();
 
+        public static bool charmChangerInstalled { get; set; } = false;
+
+        public static int currentSave { get; set; } = -1;
+
         public static List<Charm_Patches.CharmPatch> charmPatches = new List<Charm_Patches.CharmPatch>()
         {
             new BerserkersFury(),

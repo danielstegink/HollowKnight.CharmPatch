@@ -12,10 +12,8 @@
         /// </summary>
         private bool updated = false;
 
-        /// <summary>
-        /// Quick Slash reduces the cooldown of nail strikes by 39%
-        /// </summary>
-        private float modifier = 0.61f;
+        // Stores the Quick Slash modifier
+        private float modifier = 1.0f;
 
         /// <summary>
         /// Quick Arts makes Quick Slash reduce the cooldown of nail arts
@@ -28,6 +26,7 @@
                 PlayerData.instance.equippedCharm_32 &&
                 !updated)
             {
+                modifier = GetModifier(self);
                 self.NAIL_CHARGE_TIME_CHARM *= modifier;
                 self.NAIL_CHARGE_TIME_DEFAULT *= modifier;
 
@@ -35,7 +34,7 @@
                 //SharedData.Log($"Quick Arts: default charge time set to {self.NAIL_CHARGE_TIME_DEFAULT}, nmg time set to {self.NAIL_CHARGE_TIME_CHARM}");
             }
             else if ((!SharedData.globalSettings.quickArtsOn || !PlayerData.instance.equippedCharm_32) &&
-                updated) // If updated and no longer enabled, reset
+                        updated) // If updated and no longer enabled, reset
             {
                 self.NAIL_CHARGE_TIME_CHARM /= modifier;
                 self.NAIL_CHARGE_TIME_DEFAULT /= modifier;
@@ -45,6 +44,31 @@
             }
 
             orig(self);
+        }
+
+        /// <summary>
+        /// Gets the cooldown modifier of the Quick Slash charm
+        /// </summary>
+        /// <param name="self"></param>
+        /// <returns></returns>
+        private float GetModifier(HeroController self)
+        {
+            // By default, Quick Slash reduced cooldown time by 39%
+            float modifier = 0.61f;
+
+            // If Charm Changer is installed, get the cooldown times 
+            // it sets to determine that new Quick Slash modifier
+            if (SharedData.charmChangerInstalled)
+            {
+                float normalCooldown = self.ATTACK_COOLDOWN_TIME;
+                float charmCooldown = self.ATTACK_COOLDOWN_TIME_CH;
+                //SharedData.Log($"Normal attack: {normalCooldown}, Quick attack: {charmCooldown}");
+
+                modifier = charmCooldown / normalCooldown;
+            }
+
+            //SharedData.Log($"Quick Slash modifier: {modifier}");
+            return modifier;
         }
     }
 }

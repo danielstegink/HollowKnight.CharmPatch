@@ -1,4 +1,6 @@
-﻿using Modding;
+﻿using CharmPatch.OtherModHelpers;
+using Modding;
+using Newtonsoft.Json.Linq;
 using System;
 using UnityEngine;
 
@@ -29,6 +31,7 @@ namespace CharmPatch.Charm_Patches
                 string direction = GetDirection(gameObject.name);
 
                 float modifier = GetModifier(direction);
+                //SharedData.Log($"Grubberfly's Reach modifier: {modifier}");
                 
                 switch (direction)
                 {
@@ -89,14 +92,21 @@ namespace CharmPatch.Charm_Patches
         {
             // If Longnail is equipped, we want to increase the range by 15%
             if (PlayerData.instance.equippedCharm_18 &&
-                !PlayerData.instance.equippedCharm_38)
+                !PlayerData.instance.equippedCharm_13)
             {
+                if (SharedData.charmChangerInstalled)
+                {
+                    JToken modifierToken = CharmChanger.GetProperty(SharedData.currentSave, "longnailScale");
+                    float modifier = float.Parse(modifierToken.ToString()) / 100;
+                    return 1 + modifier;
+                }
+
                 return 1.15f;
             }
 
             // If Mark of Pride is equipped, we want to increase the range by 25%
             if (!PlayerData.instance.equippedCharm_18 &&
-                PlayerData.instance.equippedCharm_38)
+                PlayerData.instance.equippedCharm_13)
             {
                 // Unless we are swinging up, in which case the bonus is already
                 // applied
@@ -105,12 +115,19 @@ namespace CharmPatch.Charm_Patches
                     return 1f;
                 }
 
+                if (SharedData.charmChangerInstalled)
+                {
+                    JToken modifierToken = CharmChanger.GetProperty(SharedData.currentSave, "markOfPrideScale");
+                    float modifier = float.Parse(modifierToken.ToString()) / 100;
+                    return 1 + modifier;
+                }
+
                 return 1.25f;
             }
 
             // Both are equipped, we combine them to increase the range by 40%
             if (PlayerData.instance.equippedCharm_18 &&
-                PlayerData.instance.equippedCharm_38)
+                PlayerData.instance.equippedCharm_13)
             {
                 // Again, unless we are already swinging up
                 // In that case, we want to increase the range by 12%
@@ -118,7 +135,27 @@ namespace CharmPatch.Charm_Patches
                 // reach 40%
                 if (direction.Equals("UP"))
                 {
+                    if (SharedData.charmChangerInstalled)
+                    {
+                        // Normal: 1.25 * 1.12 ~= 1.4
+                        // New: m(MOP) * x = m(Both)
+                        JToken modifierToken = CharmChanger.GetProperty(SharedData.currentSave, "markOfPrideScale");
+                        float mopModifier = 1 + float.Parse(modifierToken.ToString()) / 100;
+
+                        modifierToken = CharmChanger.GetProperty(SharedData.currentSave, "longnailMarkOfPrideScale");
+                        float bothModifier = 1 + float.Parse(modifierToken.ToString()) / 100;
+
+                        return bothModifier / mopModifier;
+                    }
+
                     return 1.12f;
+                }
+
+                if (SharedData.charmChangerInstalled)
+                {
+                    JToken modifierToken = CharmChanger.GetProperty(SharedData.currentSave, "longnailMarkOfPrideScale");
+                    float modifier = float.Parse(modifierToken.ToString()) / 100;
+                    return 1 + modifier;
                 }
 
                 return 1.4f;

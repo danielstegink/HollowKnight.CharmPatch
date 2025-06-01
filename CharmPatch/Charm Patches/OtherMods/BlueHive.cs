@@ -1,5 +1,7 @@
-﻿using GlobalEnums;
+﻿using CharmPatch.OtherModHelpers;
+using GlobalEnums;
 using Modding;
+using Newtonsoft.Json.Linq;
 using System.Collections;
 using UnityEngine;
 
@@ -43,14 +45,11 @@ namespace CharmPatch.Charm_Patches
             //SharedData.Log($"Damage taken: {blueHiveActive}");
 
             // Store maximum blue masks
-            if (PlayerData.instance.equippedCharm_36)
+            //SharedData.Log("Setting max blue");
+            int currentBlue = PlayerData.instance.healthBlue;
+            if (maxBlue < currentBlue)
             {
-                //SharedData.Log("Setting max blue");
-                int currentBlue = PlayerData.instance.healthBlue;
-                if (maxBlue < currentBlue)
-                {
-                    maxBlue = currentBlue;
-                }
+                maxBlue = currentBlue;
             }
 
             // Apply damage
@@ -71,7 +70,7 @@ namespace CharmPatch.Charm_Patches
             while (CanHeal())
             {
                 // Hiveblood waits 24 seconds to heal blue health normally
-                yield return new WaitForSeconds(24);
+                yield return new WaitForSeconds(GetTimeout());
 
                 if (CanHeal())
                 {
@@ -124,7 +123,32 @@ namespace CharmPatch.Charm_Patches
                 return false;
             }
 
+            // Unlimited Hiveblood only triggers if Hiveblood and Kingsoul/Void Heart are both equipped
+            if (!PlayerData.instance.equippedCharm_36 || !PlayerData.instance.equippedCharm_29)
+            {
+                return false;
+            }
+
             return true;
+        }
+
+        /// <summary>
+        /// Gets the timeout between lifeblood heals
+        /// </summary>
+        /// <returns></returns>
+        private float GetTimeout()
+        {
+            // By default, Hiveblood takes 24 seconds to heal lifeblood
+            float timeout = 24f;
+
+            if (SharedData.charmChangerInstalled)
+            {
+                JToken modifierToken = CharmChanger.GetProperty(SharedData.currentSave, "hivebloodJonisTimer");
+                timeout = float.Parse(modifierToken.ToString());
+            }
+
+            //SharedData.Log($"Hiveblood blue timeout: {timeout}");
+            return timeout;
         }
     }
 }

@@ -25,13 +25,13 @@ namespace CharmPatch.Charm_Patches
         /// <returns></returns>
         private int Start(int damage)
         {
-            SharedData.Log("Attacked");
+            //SharedData.Log("Attacked");
             if (SharedData.globalSettings.outerShellOn &&
                 PlayerData.instance.blockerHits < 4 && 
                 extraHitsTaken < extraHits)
             {
-                SharedData.Log("Outer shell hit");
-                PlayerData.instance.blockerHits = 4;
+                //SharedData.Log("Outer shell hit");
+                PlayerData.instance.blockerHits++;
                 extraHitsTaken++;
             }
 

@@ -26,11 +26,11 @@ Mighty Arts - Fragile/Unbreakable Strength increases the damage dealt by Nail Ar
 
 Quick Slash reduces the charge time of Nail Arts.
 
-# Integrations with other mods
+## Integrations with other mods
 
 Blue Hive - TheMathGeek314's Unlimited Hiveblood mod heals Lifeblood Masks (including those not given by Joni's Blessing) in addition to regular ones. 
 
-# Recommended Charm Changer Settings
+## Recommended Charm Changer Settings
 
 Set Flukenest cost to 2
 
@@ -42,10 +42,18 @@ Instead of using Joni's Kindness, you can set Joni's Blessing Health Increase to
 
 Instead of using Merciful Melody, you can also balance Carefree Melody by increasing its block chance by 5%
 
-# Special Thanks To
+## Special Thanks To
 timbobaggins for the idea behind Critical Blow
 
-# Patch Notes
+## Patch Notes
+1.4.0.0
+-	Modified patches to use Charm Changer settings if installed
+-	Numerous bug fixes. It's embarassing how sloppy my testing of 1.3 must've been
+	- 	Grubberfly's Reach interacted with Dreamshield instead of Mark of Pride
+	-	Mighty Arts broken by unnecessary type check
+	-	Blue Hive triggered without Hiveblood equipped
+	-	Menu glitch where Mighty Arts and Mantis Arts toggled each other
+
 1.3.0.0
 -	3 new patches
 	-	Grubberfly's Reach increases Grubberfly's Elegy range when Longnail and/or Mark of Pride are equipped

@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using CharmPatch.OtherModHelpers;
+using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 
 namespace CharmPatch.Charm_Patches
 {
@@ -29,20 +31,40 @@ namespace CharmPatch.Charm_Patches
         /// <param name="hitInstance"></param>
         private void Start(On.HealthManager.orig_TakeDamage orig, HealthManager self, HitInstance hitInstance)
         {
+            //SharedData.Log("Damage Taken");
+            //SharedData.Log($"Strength equipped: {PlayerData.instance.equippedCharm_25}");
+            //SharedData.Log($"Mighty Arts on: {SharedData.globalSettings.mightyArtsOn}");
+            //SharedData.Log($"Attack name: {hitInstance.Source.name}");
+
             if (PlayerData.instance.equippedCharm_25 &&
                 SharedData.globalSettings.mightyArtsOn &&
-                hitInstance.AttackType == AttackTypes.Nail)
+                nailArtNames.Contains(hitInstance.Source.name))
             {
-                string attackName = hitInstance.Source.name;
-                if (nailArtNames.Contains(attackName))
-                {
-                    double bonusPercent = 0.50;
-                    int bonusDamage = (int)(hitInstance.DamageDealt * bonusPercent);
-                    hitInstance.DamageDealt += bonusDamage;
-                }
+                float bonusPercent = GetModifier();
+                int bonusDamage = (int)(hitInstance.DamageDealt * bonusPercent);
+                hitInstance.DamageDealt += bonusDamage;
             }
 
             orig(self, hitInstance);
+        }
+
+        /// <summary>
+        /// Gets the damage modifier for Fragile/Unbreakable Strength
+        /// </summary>
+        /// <returns></returns>
+        private float GetModifier()
+        {
+            // By default, Unbreakable Strength increases nail damage by 50%
+            float modifier = 0.50f;
+
+            if (SharedData.charmChangerInstalled)
+            {
+                JToken modifierToken = CharmChanger.GetProperty(SharedData.currentSave, "strengthDamageIncrease");
+                modifier = float.Parse(modifierToken.ToString()) / 100;
+            }
+
+            //SharedData.Log($"Strength modifier: {modifier}");
+            return modifier;
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using Satchel;
+﻿using CharmPatch.OtherModHelpers;
+using Newtonsoft.Json.Linq;
+using Satchel;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -37,37 +39,29 @@ namespace CharmPatch.Charm_Patches
                                             .Where(x => nailArtNames.Contains(x.name))
                                             .ToList();
 
-            // If patch is active, apply buffs
-            if (SharedData.globalSettings.mantisArtsOn)
+            foreach (GameObject gameObject in gameObjects)
             {
-                float modifier = GetModifier();
+                // Store Nail Arts object so we can reference it at its original parameters
+                // This makes it easier to change the size modifier if the player
+                //   switches charms
+                StoreOriginal(gameObject);
 
-                foreach (GameObject gameObject in gameObjects)
+                // Get the modifier. If the patch is turned off, we want to use the 
+                //   original scale
+                float modifier = 1.0f;
+                if (SharedData.globalSettings.mantisArtsOn)
                 {
-                    //SharedData.Log($"Applying Mantis Arts ({modifier}) to {gameObject.name}");
-
-                    StoreOriginal(gameObject);
-
-                    Vector3 currentScale = gameObject.transform.localScale;
-                    Vector3 originalScale = originalNailArts[gameObject.name];
-                    gameObject.SetScale(originalScale.x * modifier, originalScale.y * modifier);
-
-                    Vector3 newScale = gameObject.transform.localScale;
-                    //SharedData.Log($"{gameObject} buffed: {ToString(currentScale)} -> {ToString(originalScale)} -> {ToString(newScale)}");
+                    modifier = GetModifier();
+                    //SharedData.Log($"Mantis Arts modifier: {modifier}");
                 }
-            }
-            else // If patch is not active, remove buffs
-            {
-                foreach (GameObject gameObject in gameObjects)
-                {
-                    StoreOriginal(gameObject);
 
-                    Vector3 currentScale = gameObject.transform.localScale;
-                    Vector3 originalScale = originalNailArts[gameObject.name];
-                    gameObject.SetScale(originalScale.x, originalScale.y);
+                // Apply the modifier to the Nail Art
+                Vector3 currentScale = gameObject.transform.localScale;
+                Vector3 originalScale = originalNailArts[gameObject.name];
+                gameObject.SetScale(originalScale.x * modifier, originalScale.y * modifier);
 
-                    //SharedData.Log($"{gameObject} reset: {ToString(currentScale)} -> {ToString(originalScale)}");
-                }
+                //Vector3 newScale = gameObject.transform.localScale;
+                //SharedData.Log($"{gameObject} buffed: {ToString(currentScale)} -> {ToString(originalScale)} -> {ToString(newScale)}");
             }
 
             orig(self);
@@ -79,22 +73,52 @@ namespace CharmPatch.Charm_Patches
         /// <returns></returns>
         private float GetModifier()
         {
-            float modifier = 1;
-
             // Longnail increases nail range by 15%
-            if (PlayerData.instance.equippedCharm_18)
+            if (PlayerData.instance.equippedCharm_18 &&
+                !PlayerData.instance.equippedCharm_13)
             {
-                modifier += 0.15f;
+                float longnailModifier = 1.15f;
+                if (SharedData.charmChangerInstalled)
+                {
+                    JToken modifierToken = CharmChanger.GetProperty(SharedData.currentSave, "longnailScale");
+                    float charmChangerModifier = float.Parse(modifierToken.ToString()) / 100;
+                    longnailModifier = 1 + charmChangerModifier;
+                }
+
+                return longnailModifier;
             }
 
             // Mark of Pride increases nail range by 25%
-            // The two stack on each other, so equipping both increases range by 40%
-            if (PlayerData.instance.equippedCharm_13)
+            if (!PlayerData.instance.equippedCharm_18 &&
+                PlayerData.instance.equippedCharm_13)
             {
-                modifier += 0.25f;
+                float mopModifier = 1.25f;
+                if (SharedData.charmChangerInstalled)
+                {
+                    JToken modifierToken = CharmChanger.GetProperty(SharedData.currentSave, "markOfPrideScale");
+                    float charmChangerModifier = float.Parse(modifierToken.ToString()) / 100;
+                    mopModifier = 1 + charmChangerModifier;
+                }
+
+                return mopModifier;
             }
 
-            return modifier;
+            // The two stack on each other, so equipping both increases range by 40%
+            if (PlayerData.instance.equippedCharm_18 &&
+                PlayerData.instance.equippedCharm_13)
+            {
+                float bothModifier = 1.40f;
+                if (SharedData.charmChangerInstalled)
+                {
+                    JToken modifierToken = CharmChanger.GetProperty(SharedData.currentSave, "longnailMarkOfPrideScale");
+                    float charmChangerModifier = float.Parse(modifierToken.ToString()) / 100;
+                    bothModifier = 1 + charmChangerModifier;
+                }
+
+                return bothModifier;
+            }
+
+            return 1.0f;
         }
 
         /// <summary>

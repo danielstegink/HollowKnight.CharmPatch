@@ -1,5 +1,5 @@
-﻿using Modding;
-using System;
+﻿using CharmPatch.OtherModHelpers;
+using Newtonsoft.Json.Linq;
 
 namespace CharmPatch.Charm_Patches
 {
@@ -16,6 +16,11 @@ namespace CharmPatch.Charm_Patches
         private bool patchApplied = false;
 
         /// <summary>
+        /// Stores the dash modifier of Dashmaster
+        /// </summary>
+        private float modifier = 1f;
+
+        /// <summary>
         /// Dark Dashmaster reduces the cooldown of Shadow Dash when Dashmaster is equipped
         /// </summary>
         /// <param name="orig"></param>
@@ -24,17 +29,15 @@ namespace CharmPatch.Charm_Patches
         {
             //SharedData.Log("Dark Dashmaster check");
 
-            // Dashmaster reduces normal dash cooldown by 33%
-            // NEW: Reduced by 40% to maintain base rate of 1 shadow dash per 3 regular dashes
-            float modifier = 0.6f;
-
             // Buff once, and only if Dashmaster is equipped and Dark Dashmaster is enabled
             if (SharedData.globalSettings.darkDashmasterOn &&
                 PlayerData.instance.equippedCharm_31 &&
                 !patchApplied)
             {
+                modifier = GetModifier();
+                float originalCooldown = self.SHADOW_DASH_COOLDOWN;
                 self.SHADOW_DASH_COOLDOWN *= modifier;
-                //SharedData.Log($"Shadow dash cooldown set to {self.SHADOW_DASH_COOLDOWN}");
+                //SharedData.Log($"Shadow dash cooldown: {originalCooldown} -> {self.SHADOW_DASH_COOLDOWN}");
                 patchApplied = true;
             }
 
@@ -49,6 +52,30 @@ namespace CharmPatch.Charm_Patches
             }
 
             orig(self);
+        }
+
+        /// <summary>
+        /// Calculates the desired cooldown modifier for Dashmaster
+        /// </summary>
+        /// <returns></returns>
+        private float GetModifier()
+        {
+            // By default, Dashmaster reduces the dash cooldown by 33%
+            float modifier = 0.66f;
+
+            if (SharedData.charmChangerInstalled)
+            {
+                JToken modifierToken = CharmChanger.GetProperty(SharedData.currentSave, "regularDashCooldown");
+                float regularDash = float.Parse(modifierToken.ToString());
+
+                modifierToken = CharmChanger.GetProperty(SharedData.currentSave, "dashmasterDashCooldown");
+                float darkDash = float.Parse(modifierToken.ToString());
+
+                modifier = darkDash / regularDash;
+            }
+
+            //SharedData.Log($"Dashmaster modifier: {modifier}");
+            return modifier;
         }
     }
 }
