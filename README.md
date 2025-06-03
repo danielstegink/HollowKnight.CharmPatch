@@ -24,7 +24,7 @@ Mantis Arts - Longnail and Mark of Pride increase the range of Nail Arts.
 
 Mighty Arts - Fragile/Unbreakable Strength increases the damage dealt by Nail Arts.
 
-Quick Slash reduces the charge time of Nail Arts.
+Quick Arts - Quick Slash reduces the charge time of Nail Arts.
 
 ## Integrations with other mods
 
@@ -46,6 +46,9 @@ Instead of using Merciful Melody, you can also balance Carefree Melody by increa
 timbobaggins for the idea behind Critical Blow
 
 ## Patch Notes
+1.4.1.0
+-	Bug fix where Grubberfly's Reach made Grubberfly beams from FOTF grown repeatedly instead of just once
+
 1.4.0.0
 -	Modified patches to use Charm Changer settings if installed
 -	Numerous bug fixes. It's embarassing how sloppy my testing of 1.3 must've been

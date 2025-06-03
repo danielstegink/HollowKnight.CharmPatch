@@ -2,6 +2,8 @@
 using Modding;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace CharmPatch.Charm_Patches
@@ -14,8 +16,13 @@ namespace CharmPatch.Charm_Patches
         }
 
         /// <summary>
-        /// Grubberfly's Reach makes Longnail and Mark of Pride
-        /// increase the range of beams from Grubberfly's Elegy
+        /// Stores beam objects to deal with FOTF bug
+        /// </summary>
+        private Dictionary<string, GameObject> beams = new Dictionary<string, GameObject>();
+
+        /// <summary>
+        /// Grubberfly's Reach makes Longnail and Mark of Pride increase the range of beams 
+        /// from Grubberfly's Elegy
         /// </summary>
         /// <param name="object"></param>
         /// <returns></returns>
@@ -27,12 +34,22 @@ namespace CharmPatch.Charm_Patches
                 gameObject.name.StartsWith("Grubberfly Beam") &&
                 gameObject.name.Contains("(Clone)"))
             {
-                //SharedData.Log($"Grubberfly's Beam found: {gameObject.name}");
-                string direction = GetDirection(gameObject.name);
+                SharedData.Log($"Grubberfly's Beam found: {gameObject.name}");
 
+                // FOTF clones itself off a clone object, so there is no way to tell the original
+                // from the clones, and the beam will keep getting bigger. So instead we store 
+                // the originals, modify them, and pass them along
+                if (!beams.Keys.Contains(gameObject.name))
+                {
+                    SharedData.Log("Adding beam to list");
+                    beams.Add(gameObject.name, gameObject);
+                }
+                gameObject = GameObject.Instantiate(beams[gameObject.name]);
+
+                string direction = GetDirection(gameObject.name);
                 float modifier = GetModifier(direction);
                 //SharedData.Log($"Grubberfly's Reach modifier: {modifier}");
-                
+
                 switch (direction)
                 {
                     case "LEFT":
@@ -49,6 +66,8 @@ namespace CharmPatch.Charm_Patches
                         SharedData.Log($"Invalid direction for Grubberfly's Reach: {direction}");
                         break;
                 }
+
+                SharedData.Log($"Final dimensions: {gameObject.transform.GetScaleX()}, {gameObject.transform.GetScaleY()}");
             }
 
             return gameObject;
