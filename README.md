@@ -46,8 +46,11 @@ Instead of using Merciful Melody, you can also balance Carefree Melody by increa
 timbobaggins for the idea behind Critical Blow
 
 ## Patch Notes
+1.4.1.1
+-	Bug fix where Grubberfly's Reach produced sideways beam attacks instead of vertical ones when attacking up/down
+
 1.4.1.0
--	Bug fix where Grubberfly's Reach made Grubberfly beams from FOTF grown repeatedly instead of just once
+-	Bug fix where Grubberfly's Reach stacked, causing Grubberfly beams from FOTF to grow repeatedly
 
 1.4.0.0
 -	Modified patches to use Charm Changer settings if installed
