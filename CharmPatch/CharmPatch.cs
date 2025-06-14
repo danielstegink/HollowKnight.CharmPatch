@@ -7,7 +7,7 @@ namespace CharmPatch
 {
     public class CharmPatch : Mod, ICustomMenuMod, IGlobalSettings<GlobalSettings>
     {
-        public override string GetVersion() => "1.4.1.0";
+        public override string GetVersion() => "1.4.1.1";
 
         public void OnLoadGlobal(GlobalSettings s)
         {
