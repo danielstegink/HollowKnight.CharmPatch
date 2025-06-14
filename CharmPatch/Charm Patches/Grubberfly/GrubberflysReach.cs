@@ -1,6 +1,7 @@
 ﻿using CharmPatch.OtherModHelpers;
 using Modding;
 using Newtonsoft.Json.Linq;
+using Satchel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,41 +11,44 @@ namespace CharmPatch.Charm_Patches
 {
     internal class GrubberflysReach : CharmPatch
     {
+        /// <summary>
+        /// Stores beam dimensions to fight scale-stacking
+        /// </summary>
+        private Dictionary<string, Vector3> baseDimensions = new Dictionary<string, Vector3>();
+
         public void AddHook()
         {
             ModHooks.ObjectPoolSpawnHook += ExtendBeam;
         }
 
         /// <summary>
-        /// Stores beam objects to deal with FOTF bug
-        /// </summary>
-        private Dictionary<string, GameObject> beams = new Dictionary<string, GameObject>();
-
-        /// <summary>
         /// Grubberfly's Reach makes Longnail and Mark of Pride increase the range of beams 
         /// from Grubberfly's Elegy
         /// </summary>
-        /// <param name="object"></param>
+        /// <param name="gameObject"></param>
         /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
         private GameObject ExtendBeam(GameObject gameObject)
         {
-            // We only want to modify the clones
+            // We only want to modify the clones 
             if (SharedData.globalSettings.grubberflysReachOn &&
                 gameObject.name.StartsWith("Grubberfly Beam") &&
                 gameObject.name.Contains("(Clone)"))
             {
-                SharedData.Log($"Grubberfly's Beam found: {gameObject.name}");
+                //SharedData.Log($"Grubberfly's Beam found: {gameObject.name}");
+                //SharedData.Log($"Old dimensions: {gameObject.transform.GetScaleX()}, {gameObject.transform.GetScaleY()}");
 
-                // FOTF clones itself off a clone object, so there is no way to tell the original
-                // from the clones, and the beam will keep getting bigger. So instead we store 
-                // the originals, modify them, and pass them along
-                if (!beams.Keys.Contains(gameObject.name))
+                // Risk of buff getting stacked and beams getting ridiculously big
+                // So store the dimensions of the first one we see of each type, 
+                //  and auto-correct each on to that scale before continuing
+                if (!baseDimensions.Keys.Contains(gameObject.name))
                 {
-                    SharedData.Log("Adding beam to list");
-                    beams.Add(gameObject.name, gameObject);
+                    //SharedData.Log("Adding beam to list");
+                    baseDimensions.Add(gameObject.name, gameObject.transform.localScale);
                 }
-                gameObject = GameObject.Instantiate(beams[gameObject.name]);
+                else
+                {
+                    gameObject.transform.localScale = baseDimensions[gameObject.name];
+                }
 
                 string direction = GetDirection(gameObject.name);
                 float modifier = GetModifier(direction);
@@ -67,7 +71,7 @@ namespace CharmPatch.Charm_Patches
                         break;
                 }
 
-                SharedData.Log($"Final dimensions: {gameObject.transform.GetScaleX()}, {gameObject.transform.GetScaleY()}");
+                //SharedData.Log($"Final dimensions: {gameObject.transform.GetScaleX()}, {gameObject.transform.GetScaleY()}");
             }
 
             return gameObject;
