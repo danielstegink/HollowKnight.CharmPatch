@@ -2,11 +2,6 @@
 {
     public class QuickArts : CharmPatch
     {
-        public void AddHook()
-        {
-            On.HeroController.Update += Start;
-        }
-
         /// <summary>
         /// Tracks whether we've applied the buff or not
         /// </summary>
@@ -15,12 +10,17 @@
         // Stores the Quick Slash modifier
         private float modifier = 1.0f;
 
+        public void AddHook()
+        {
+            On.HeroController.CharmUpdate += Start;
+        }
+
         /// <summary>
         /// Quick Arts makes Quick Slash reduce the cooldown of nail arts
         /// </summary>
         /// <param name="orig"></param>
         /// <param name="self"></param>
-        private void Start(On.HeroController.orig_Update orig, HeroController self)
+        private void Start(On.HeroController.orig_CharmUpdate orig, HeroController self)
         {
             if (SharedData.globalSettings.quickArtsOn && 
                 PlayerData.instance.equippedCharm_32 &&
@@ -44,6 +44,18 @@
             }
 
             orig(self);
+
+            // Manually set the charge time
+            //SharedData.Log($"Quick Arts: original charge time: {SharedData.GetField<HeroController, float>(self, "nailChargeTime")}");
+            if (PlayerData.instance.equippedCharm_26)
+            {
+                SharedData.SetField(self, "nailChargeTime", self.NAIL_CHARGE_TIME_CHARM);
+            }
+            else
+            {
+                SharedData.SetField(self, "nailChargeTime", self.NAIL_CHARGE_TIME_DEFAULT);
+            }
+            //SharedData.Log($"Quick Arts: final charge time: {SharedData.GetField<HeroController, float>(self, "nailChargeTime")}");
         }
 
         /// <summary>

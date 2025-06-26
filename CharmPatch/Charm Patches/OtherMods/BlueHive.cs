@@ -63,6 +63,10 @@ namespace CharmPatch.Charm_Patches
             }
         }
 
+        /// <summary>
+        /// Coroutine that handles the regeneration of blue health in the background
+        /// </summary>
+        /// <returns></returns>
         private IEnumerator HealBlue()
         {
             //SharedData.Log("Heal Blue started");
@@ -113,6 +117,12 @@ namespace CharmPatch.Charm_Patches
             if (!SharedData.globalSettings.blueHiveOn)
             {
                 //SharedData.Log("Blue Hive not enabled");
+                return false;
+            }
+
+            // Cancel if Blue Hive has been reset
+            if (!blueHiveActive)
+            {
                 return false;
             }
 

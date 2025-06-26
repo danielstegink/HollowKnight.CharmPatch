@@ -21,7 +21,8 @@ namespace CharmPatch.Charm_Patches
             {
                 // Only trigger when Carefree Melody blocks and player is damaged
                 GameObject shield = HeroController.instance.carefreeShield;
-                if (shield != null && shield.activeSelf &&
+                if (shield != null && 
+                    shield.activeSelf &&
                     PlayerData.instance.health < PlayerData.instance.maxHealth)
                 {
                     int random = UnityEngine.Random.Range(1, 101);

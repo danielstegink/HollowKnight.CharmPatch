@@ -1,16 +1,12 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CharmPatch.OtherModHelpers
 {
-    public static class CharmChanger
+    public static class Exaltation
     {
         /// <summary>
-        /// Gets a Charm Changer setting via the save file
+        /// Gets an Exaltation setting via the save file
         /// </summary>
         /// <param name="saveIndex"></param>
         /// <param name="propertyName"></param>
@@ -27,36 +23,36 @@ namespace CharmPatch.OtherModHelpers
                 if (saveFile == null)
                 {
                     SharedData.Log("Save File JObject not found");
-                    return "0";
+                    return "false";
                 }
 
                 JToken token = saveFile["modData"];
                 if (token == null)
                 {
                     SharedData.Log("modData JToken not found");
-                    return "0";
+                    return "false";
                 }
 
-                token = token["CharmChanger"];
+                token = token["Exaltation"];
                 if (token == null)
                 {
-                    SharedData.Log("CharmChanger JToken not found");
-                    return "0";
+                    SharedData.Log("Exaltation JToken not found");
+                    return "false";
                 }
 
                 token = token[propertyName];
                 if (token == null)
                 {
                     SharedData.Log($"{propertyName} JToken not found");
-                    return "0";
+                    return "false";
                 }
 
                 return token.ToString();
             }
-            catch (Exception ex) // If this breaks, we probly don't have Pale Court installed
+            catch (Exception ex) // If this breaks, we probly don't have the mod installed
             {
-                SharedData.Log($"Exception while checking Charm Changer: \n{ex.Message}\n{ex.StackTrace}");
-                return "0";
+                SharedData.Log($"Exception while checking Exaltation: \n{ex.Message}\n{ex.StackTrace}");
+                return "false";
             }
         }
     }

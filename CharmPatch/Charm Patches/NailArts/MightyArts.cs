@@ -4,24 +4,12 @@ using System.Collections.Generic;
 
 namespace CharmPatch.Charm_Patches
 {
-    internal class MightyArts : CharmPatch
+    public class MightyArts : CharmPatch
     {
         public void AddHook()
         {
             On.HealthManager.TakeDamage += Start;
         }
-
-        /// <summary>
-        /// List of the object names of the Nail Art attacks
-        /// </summary>
-        private static List<string> nailArtNames = new List<string>()
-        {
-            "Cyclone Slash",
-            "Great Slash",
-            "Dash Slash",
-            "Hit L",
-            "Hit R"
-        };
 
         /// <summary>
         /// Fragile/Unbreakable Strength increases the damage dealt by Nail Arts by 50%, just like regular nail attacks
@@ -38,7 +26,7 @@ namespace CharmPatch.Charm_Patches
 
             if (PlayerData.instance.equippedCharm_25 &&
                 SharedData.globalSettings.mightyArtsOn &&
-                nailArtNames.Contains(hitInstance.Source.name))
+                SharedData.nailArtNames.Contains(hitInstance.Source.name))
             {
                 float bonusPercent = GetModifier();
                 int bonusDamage = (int)(hitInstance.DamageDealt * bonusPercent);

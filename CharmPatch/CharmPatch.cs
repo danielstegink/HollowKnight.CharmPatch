@@ -7,7 +7,7 @@ namespace CharmPatch
 {
     public class CharmPatch : Mod, ICustomMenuMod, IGlobalSettings<GlobalSettings>
     {
-        public override string GetVersion() => "1.4.1.1";
+        public override string GetVersion() => "1.4.2.0";
 
         public void OnLoadGlobal(GlobalSettings s)
         {
@@ -33,6 +33,13 @@ namespace CharmPatch
             if (blueHive is BlueHive)
             {
                 ((BlueHive)blueHive).unlimitedHiveblood = ModHooks.GetMod("UnlimitedHiveblood");
+            }
+
+            // Check if Exaltation is installed; if so, Outer Shell can regenerate
+            Charm_Patches.CharmPatch outerShell = SharedData.charmPatches[3];
+            if (outerShell is OuterShell)
+            {
+                ((OuterShell)outerShell).exaltation = ModHooks.GetMod("Exaltation");
             }
 
             // Note if Charm Changer is installed

@@ -7,24 +7,12 @@ using UnityEngine;
 
 namespace CharmPatch.Charm_Patches
 {
-    internal class MantisArts : CharmPatch
+    public class MantisArts : CharmPatch
     {
         public void AddHook()
         {
             On.HeroController.Update += Start;
         }
-
-        /// <summary>
-        /// List of the object names of the Nail Art attacks
-        /// </summary>
-        private List<string> nailArtNames = new List<string>()
-        {
-            "Cyclone Slash",
-            "Great Slash",
-            "Dash Slash",
-            "Hit L",
-            "Hit R"
-        };
 
         /// <summary>
         /// Stores the original scales of the nail arts
@@ -36,7 +24,7 @@ namespace CharmPatch.Charm_Patches
             // Get all nail art objects
             List<GameObject> gameObjects = UnityEngine.Object.FindObjectsOfType<GameObject>()
                                             .AsEnumerable()
-                                            .Where(x => nailArtNames.Contains(x.name))
+                                            .Where(x => SharedData.nailArtNames.Contains(x.name))
                                             .ToList();
 
             foreach (GameObject gameObject in gameObjects)

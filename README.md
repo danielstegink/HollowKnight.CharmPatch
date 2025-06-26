@@ -46,6 +46,12 @@ Instead of using Merciful Melody, you can also balance Carefree Melody by increa
 timbobaggins for the idea behind Critical Blow
 
 ## Patch Notes
+1.4.2.0
+-	Bug fix - Quick Arts didn't actually work as intended
+-	Bug fix - Dark Dashmaster now synergizes with mods that modify Shadow Dash cooldown, such as Pale Court
+-	Outer Shell now synergizes with Exaltation's Stone Shell
+-	Minor code updates
+
 1.4.1.1
 -	Bug fix where Grubberfly's Reach produced sideways beam attacks instead of vertical ones when attacking up/down
 

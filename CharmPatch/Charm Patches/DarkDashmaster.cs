@@ -5,20 +5,20 @@ namespace CharmPatch.Charm_Patches
 {
     public class DarkDashmaster : CharmPatch
     {
+        /// <summary>
+        /// Stores original Shadow Dash cooldown
+        /// </summary>
+        private float originalCooldown = -1f;
+
+        /// <summary>
+        /// Stores the Shadow Dash cooldown set by this patch
+        /// </summary>
+        private float moddedCooldown = -1f;
+
         public void AddHook()
         {
             On.HeroController.Update += Start;
         }
-
-        /// <summary>
-        /// Stores whether or not the patch has been applied
-        /// </summary>
-        private bool patchApplied = false;
-
-        /// <summary>
-        /// Stores the dash modifier of Dashmaster
-        /// </summary>
-        private float modifier = 1f;
 
         /// <summary>
         /// Dark Dashmaster reduces the cooldown of Shadow Dash when Dashmaster is equipped
@@ -29,26 +29,27 @@ namespace CharmPatch.Charm_Patches
         {
             //SharedData.Log("Dark Dashmaster check");
 
-            // Buff once, and only if Dashmaster is equipped and Dark Dashmaster is enabled
+            // Buff once and only if Dashmaster is equipped and Dark Dashmaster is enabled
+            // However, may need to update if the cooldown has been adjusted by another mod 
             if (SharedData.globalSettings.darkDashmasterOn &&
                 PlayerData.instance.equippedCharm_31 &&
-                !patchApplied)
+                moddedCooldown != self.SHADOW_DASH_COOLDOWN)
             {
-                modifier = GetModifier();
-                float originalCooldown = self.SHADOW_DASH_COOLDOWN;
+                float modifier = GetModifier();
+                originalCooldown = self.SHADOW_DASH_COOLDOWN;
                 self.SHADOW_DASH_COOLDOWN *= modifier;
+                moddedCooldown = self.SHADOW_DASH_COOLDOWN;
                 //SharedData.Log($"Shadow dash cooldown: {originalCooldown} -> {self.SHADOW_DASH_COOLDOWN}");
-                patchApplied = true;
             }
 
             // Make sure to reset if Dashmaster removed or patch disabled
             if ((!self.playerData.equippedCharm_31 || !SharedData.globalSettings.darkDashmasterOn) &&
-                patchApplied)
+                originalCooldown > 0)
             {
-                self.SHADOW_DASH_COOLDOWN /= modifier;
+                self.SHADOW_DASH_COOLDOWN = originalCooldown;
+                moddedCooldown = self.SHADOW_DASH_COOLDOWN;
+                originalCooldown = -1;
                 //SharedData.Log($"Shadow dash reset to {self.SHADOW_DASH_COOLDOWN}");
-
-                patchApplied = false;
             }
 
             orig(self);

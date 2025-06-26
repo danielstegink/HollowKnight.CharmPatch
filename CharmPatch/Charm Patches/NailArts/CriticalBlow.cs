@@ -2,24 +2,12 @@
 
 namespace CharmPatch.Charm_Patches
 {
-    internal class CriticalBlow : CharmPatch
+    public class CriticalBlow : CharmPatch
     {
         public void AddHook()
         {
             On.HealthManager.TakeDamage += Start;
         }
-
-        /// <summary>
-        /// List of the object names of the Nail Art attacks
-        /// </summary>
-        private static List<string> nailArtNames = new List<string>()
-        {
-            "Cyclone Slash",
-            "Great Slash",
-            "Dash Slash",
-            "Hit L",
-            "Hit R"
-        };
 
         /// <summary>
         /// Critical Blow increases the damage dealt by Nail Arts when Heavy Blow is equipped
@@ -41,7 +29,7 @@ namespace CharmPatch.Charm_Patches
                 string attackName = hitInstance.Source.name;
                 //SharedData.Log($"Attack: {attackName}");
 
-                if (nailArtNames.Contains(attackName))
+                if (SharedData.nailArtNames.Contains(attackName))
                 {
                     double bonusPercent = 0.40;
                     int bonusDamage = (int)(hitInstance.DamageDealt * bonusPercent);
