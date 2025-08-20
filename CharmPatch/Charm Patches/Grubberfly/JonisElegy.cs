@@ -4,16 +4,29 @@ using System;
 
 namespace CharmPatch.Charm_Patches
 {
-    internal class JonisElegy : CharmPatch
+    /// <summary>
+    /// Joni's Elegy makes it possible for Grubberfly's Elegy to start working again after 
+    /// taking damage while Joni's Blessing is equipped if the damage appears to have healed
+    /// </summary>
+    public class JonisElegy : Patch
     {
-        public void AddHook()
+        public bool IsActive => SharedData.globalSettings.jonisElegyOn;
+
+        public void Start()
         {
-            On.HeroController.Attack += KeepGrubberfly;
+            if (IsActive)
+            {
+                On.HeroController.Attack += KeepGrubberfly;
+            }
+        }
+
+        public void Stop()
+        {
+            On.HeroController.Attack -= KeepGrubberfly;
         }
 
         /// <summary>
-        /// Normally, Grubberfly's Elegy doesn't trigger while Joni's Blessing is equipped and the player has
-        /// taken damage, even if Hiveblood has healed the damage already. This patch should fix that.
+        /// When we attack, if our blue health appears to match what we'd expect from Joni, we enabled Grubberfly's Elegy
         /// </summary>
         /// <param name="orig"></param>
         /// <param name="self"></param>
@@ -21,21 +34,18 @@ namespace CharmPatch.Charm_Patches
         /// <exception cref="NotImplementedException"></exception>
         private void KeepGrubberfly(On.HeroController.orig_Attack orig, HeroController self, AttackDirection attackDir)
         {
-            //SharedData.Log($"Current health: {PlayerData.instance.healthBlue} out of {PlayerData.instance.joniHealthBlue}");
-            if (SharedData.globalSettings.jonisElegyOn)
+            //CharmPatch.Instance.Log($"Current health: {PlayerData.instance.GetInt("healthBlue")} out of {PlayerData.instance.GetInt("joniHealthBlue")}");
+            if (PlayerData.instance.GetInt("healthBlue") >= PlayerData.instance.GetInt("joniHealthBlue"))
             {
-                if (PlayerData.instance.healthBlue == PlayerData.instance.joniHealthBlue)
-                {
-                    HeroControllerR.joniBeam = true;
-                    //SharedData.Log("Joni enabled");
-                }
-                else if (PlayerData.instance.healthBlue < PlayerData.instance.joniHealthBlue)
-                {
-                    HeroControllerR.joniBeam = false;
-                    //SharedData.Log("Joni disabled");
-                }
+                HeroControllerR.joniBeam = true;
+                //CharmPatch.Instance.Log("Joni enabled");
             }
-            
+            else if (PlayerData.instance.GetInt("healthBlue") < PlayerData.instance.GetInt("joniHealthBlue"))
+            {
+                HeroControllerR.joniBeam = false;
+                //CharmPatch.Instance.Log("Joni disabled");
+            }
+
             orig(self, attackDir);
         }
     }

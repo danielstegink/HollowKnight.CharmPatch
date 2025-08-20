@@ -1,42 +1,43 @@
-﻿using System.Collections.Generic;
+﻿using DanielSteginkUtils.Utilities;
 
 namespace CharmPatch.Charm_Patches
 {
-    public class CriticalBlow : CharmPatch
+    /// <summary>
+    /// Critical Blow increases the damage dealt by Nail Arts when Heavy Blow is equipped
+    /// </summary>
+    public class CriticalBlow : Patch
     {
-        public void AddHook()
+        public bool IsActive => SharedData.globalSettings.criticalBlowOn;
+
+        public void Start()
         {
-            On.HealthManager.TakeDamage += Start;
+            if (IsActive)
+            {
+                On.HealthManager.TakeDamage += BuffNailArts;
+            }
+        }
+
+        public void Stop()
+        {
+            On.HealthManager.TakeDamage -= BuffNailArts;
         }
 
         /// <summary>
-        /// Critical Blow increases the damage dealt by Nail Arts when Heavy Blow is equipped
+        /// Increases the damage dealt by Nail Arts
         /// </summary>
         /// <param name="orig"></param>
         /// <param name="self"></param>
         /// <param name="hitInstance"></param>
-        private void Start(On.HealthManager.orig_TakeDamage orig, HealthManager self, HitInstance hitInstance)
+        private void BuffNailArts(On.HealthManager.orig_TakeDamage orig, HealthManager self, HitInstance hitInstance)
         {
-            //SharedData.Log($"Critical Blow Enabled: {SharedData.globalSettings.criticalBlowOn}");
-            //SharedData.Log($"Heavy Blow Equipped: {PlayerData.instance.equippedCharm_15}");
-
-            if (PlayerData.instance.equippedCharm_15 && 
-                SharedData.globalSettings.criticalBlowOn &&
-                hitInstance.AttackType == AttackTypes.Nail)
+            if (PlayerData.instance.GetBool("equippedCharm_15") && 
+                Logic.IsNailArt(hitInstance.Source.name))
             {
-                //SharedData.Log("Critical Blow enabled");
-
-                string attackName = hitInstance.Source.name;
-                //SharedData.Log($"Attack: {attackName}");
-
-                if (SharedData.nailArtNames.Contains(attackName))
-                {
-                    double bonusPercent = 0.40;
-                    int bonusDamage = (int)(hitInstance.DamageDealt * bonusPercent);
-                    //SharedData.Log($"{attackName}: {hitInstance.DamageDealt} damage increased by {bonusDamage}");
-
-                    hitInstance.DamageDealt += bonusDamage;
-                }
+                // Overall Heavy Blow feels like more of a 1-notch charm, so we should give 1 notch of extra Nail Art damage
+                float modifier = 1 + NotchCosts.NailArtDamagePerNotch();
+                int baseDamage = hitInstance.DamageDealt;
+                hitInstance.DamageDealt = Calculations.GetModdedInt(baseDamage, modifier);
+                //CharmPatch.Instance.Log($"Critical Blow - {baseDamage} damage increased by {modifier} to {hitInstance.DamageDealt}");
             }
 
             orig(self, hitInstance);

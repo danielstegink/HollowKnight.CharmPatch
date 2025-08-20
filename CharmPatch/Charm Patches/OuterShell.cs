@@ -5,12 +5,27 @@ using UnityEngine;
 
 namespace CharmPatch.Charm_Patches
 {
-    public class OuterShell : CharmPatch
+    /// <summary>
+    /// Outer Shell increases the number of hits Baldur Shell can absorb
+    /// </summary>
+    public class OuterShell : Patch
     {
-        /// <summary>
-        /// Stores the Exaltation mod, if its installed
-        /// </summary>
-        public IMod exaltation;
+        public bool IsActive => SharedData.globalSettings.outerShellOn;
+
+        public void Start()
+        {
+            if (IsActive)
+            {
+                ModHooks.TakeHealthHook += Start;
+                On.PlayerData.MaxHealth += Refresh;
+            }
+        }
+
+        public void Stop()
+        {
+            ModHooks.TakeHealthHook -= Start;
+            On.PlayerData.MaxHealth -= Refresh;
+        }
 
         /// <summary>
         /// The number of extra hits Baldur Shell can take
@@ -25,12 +40,6 @@ namespace CharmPatch.Charm_Patches
         /// </summary>
         private bool stoneShellActive = false;
 
-        public void AddHook()
-        {
-            ModHooks.TakeHealthHook += Start;
-            On.PlayerData.MaxHealth += Refresh;
-        }
-
         /// <summary>
         /// Outer Shell lets Baldur Shell take 2 extra hits before breaking
         /// </summary>
@@ -38,19 +47,16 @@ namespace CharmPatch.Charm_Patches
         /// <returns></returns>
         private int Start(int damage)
         {
-            //SharedData.Log("Attacked");
-            if (SharedData.globalSettings.outerShellOn &&
-                PlayerData.instance.blockerHits < 4 && 
-                extraHitsTaken < extraHits &&
-                PlayerData.instance.equippedCharm_5)
+            if (extraHitsTaken < extraHits &&
+                PlayerData.instance.GetBool("equippedCharm_5"))
             {
-                //SharedData.Log("Outer shell hit");
-                PlayerData.instance.blockerHits++;
+                PlayerData.instance.IntAdd("blockerHits", 1);
                 extraHitsTaken++;
 
                 // Set up a loop to heal until full
                 if (!stoneShellActive)
                 {
+                    //CharmPatch.Instance.Log($"Starting Stone Shell");
                     stoneShellActive = true;
                     GameManager.instance.StartCoroutine(StoneShell());
                 }
@@ -73,6 +79,7 @@ namespace CharmPatch.Charm_Patches
                 if (CanHeal())
                 {
                     extraHitsTaken--;
+                    //CharmPatch.Instance.Log($"Stone shell hits reduced to {extraHitsTaken}");
                 }
             }
 
@@ -81,7 +88,7 @@ namespace CharmPatch.Charm_Patches
         }
 
         /// <summary>
-        /// Checks if OuterShell can regenerate
+        /// Checks if Outer Shell can regenerate
         /// </summary>
         /// <returns></returns>
         private bool CanHeal()
@@ -89,36 +96,40 @@ namespace CharmPatch.Charm_Patches
             // If already healed, skip
             if (extraHitsTaken == 0)
             {
+                //CharmPatch.Instance.Log($"Stone Shell - No hits to recharge");
                 return false;
             }
 
             // If the patch is not enabled, skip
-            if (!SharedData.globalSettings.outerShellOn)
+            if (!IsActive)
             {
+                //CharmPatch.Instance.Log($"Stone Shell - Not turned on");
                 return false;
             }
 
             // Cancel if Outer Shell has been reset
             if (!stoneShellActive)
             {
+                //CharmPatch.Instance.Log($"Stone Shell - Reset");
                 return false;
             }
 
             // If Theodore's Exaltation mod isn't installed, skip
-            if (exaltation == null)
+            if (SharedData.exaltationMod == null)
             {
+                //CharmPatch.Instance.Log($"Stone Shell - Exaltation not installed");
                 return false;
             }
 
             // Requires Stone Shell be unlocked and Baldur Shell equipped
-            string modifierToken = Exaltation.GetProperty(SharedData.currentSave, "BaldurShellGlorified");
-            bool stoneShellUnlocked = bool.Parse(modifierToken);
-            if (!stoneShellUnlocked ||
-                !PlayerData.instance.equippedCharm_5)
+            if (!(bool)SharedData.dataStore["stoneShellUnlocked"] ||
+                !PlayerData.instance.GetBool("equippedCharm_5"))
             {
+                //CharmPatch.Instance.Log($"Stone Shell - Not upgraded or not equipped");
                 return false;
             }
 
+            //CharmPatch.Instance.Log($"Stone Shell - Able to heal");
             return true;
         }
 

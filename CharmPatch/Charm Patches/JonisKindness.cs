@@ -1,27 +1,33 @@
-﻿using Modding;
-
-namespace CharmPatch.Charm_Patches
+﻿namespace CharmPatch.Charm_Patches
 {
-    public class JonisKindness : CharmPatch
+    /// <summary>
+    /// Joni's Kindness increases the number of masks given by Joni's Blessing
+    /// </summary>
+    public class JonisKindness : Patch
     {
-        public void AddHook()
+        public bool IsActive => SharedData.globalSettings.jonisKindnessOn;
+
+        public void Start()
         {
-            ModHooks.CharmUpdateHook += Start;
+            if (IsActive)
+            {
+                On.HeroController.CharmUpdate += BuffHealth;
+            }
         }
 
-        /// <summary>
-        /// Joni's Blessing gives 2 additional Masks
-        /// </summary>
-        /// <param name="data"></param>
-        /// <param name="controller"></param>
-        private void Start(PlayerData data, HeroController controller)
+        public void Stop()
         {
-            if (SharedData.globalSettings.jonisKindnessOn &&
-                PlayerData.instance.equippedCharm_27)
+            On.HeroController.CharmUpdate -= BuffHealth;
+        }
+
+        private void BuffHealth(On.HeroController.orig_CharmUpdate orig, HeroController self)
+        {
+            orig(self);
+
+            if (PlayerData.instance.GetBool("equippedCharm_27"))
             {
-                PlayerData.instance.joniHealthBlue += 2;
-                PlayerData.instance.MaxHealth();
-                //SharedData.Log($"Joni count: {PlayerData.instance.joniHealthBlue}");
+                PlayerData.instance.IntAdd("joniHealthBlue", 2);
+                //CharmPatch.Instance.Log($"Joni's Kindness - Blue health increased to {PlayerData.instance.GetInt("joniHealthBlue")}");
             }
         }
     }

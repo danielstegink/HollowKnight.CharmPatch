@@ -1,43 +1,69 @@
-﻿using Modding;
+﻿using DanielSteginkUtils.Utilities;
+using GlobalEnums;
+using HKMirror.Reflection.SingletonClasses;
 using UnityEngine;
 
 namespace CharmPatch.Charm_Patches
 {
-    public class MercifulMelody : CharmPatch
+    /// <summary>
+    /// Merciful Melody adds a chance of Carefree Melody healing 1 health when triggered
+    /// </summary>
+    public class MercifulMelody : Patch
     {
-        public void AddHook()
+        public bool IsActive => SharedData.globalSettings.mercifulMelodyOn;
+
+        public void Start()
         {
-            ModHooks.TakeHealthHook += Start;
+            if (IsActive)
+            {
+                On.HeroController.TakeDamage += Heal;
+            }
+        }
+
+        public void Stop()
+        {
+            On.HeroController.TakeDamage -= Heal;
         }
 
         /// <summary>
-        /// Adds a chance that Carefree Melody will heal 1 damage when triggered
+        /// Personally, I think this ability should be equivalent to a 5% increase in CM's chance of triggering.
+        /// 
+        /// Healing a mask negates damage, making it equivalent to CM triggering twice in a row, so there should 
+        /// be a roughly 6.5% chance of a heal occurring.
         /// </summary>
-        /// <param name="damage"></param>
-        /// <returns></returns>
-        private int Start(int damage)
+        /// <param name="orig"></param>
+        /// <param name="self"></param>
+        /// <param name="go"></param>
+        /// <param name="damageSide"></param>
+        /// <param name="damageAmount"></param>
+        /// <param name="hazardType"></param>
+        private void Heal(On.HeroController.orig_TakeDamage orig, HeroController self, GameObject go, CollisionSide damageSide, int damageAmount, int hazardType)
         {
-            if (SharedData.globalSettings.mercifulMelodyOn)
-            {
-                // Only trigger when Carefree Melody blocks and player is damaged
-                GameObject shield = HeroController.instance.carefreeShield;
-                if (shield != null && 
-                    shield.activeSelf &&
-                    PlayerData.instance.health < PlayerData.instance.maxHealth)
-                {
-                    int random = UnityEngine.Random.Range(1, 101);
-                    //SharedData.Log($"Merciful Melody - {random}");
+            // We don't want to repeatedly trigger while I-Frames are active
+            // So we check before hand if we could've even taken damage
+            // But we have to check before the call, or I-Frames will be active and we'll get a false negative
+            bool canTakeDamage = HeroControllerR.CanTakeDamage();
+            orig(self, go, damageSide, damageAmount, hazardType);
 
-                    // 50% chance we gain 1 Mask
-                    if (random <= 50)
+            // Only trigger when Carefree Melody blocks
+            GameObject shield = HeroController.instance.carefreeShield;
+            if (shield != null &&
+                shield.activeSelf)
+            {
+                // Verify that we even have damage to heal and that
+                // I-Frames aren't active and making this trigger repeatedly
+                if (PlayerData.instance.GetInt("health") < PlayerData.instance.CurrentMaxHealth &&
+                    canTakeDamage)
+                {
+                    int healingChance = Calculations.GetSecondMelodyShield(5f);
+                    int random = UnityEngine.Random.Range(1, 101);
+                    //CharmPatch.Instance.Log($"Merciful Melody - {random} vs {healingChance}");
+                    if (random <= healingChance)
                     {
                         HeroController.instance.AddHealth(1);
-                        //SharedData.Log("Merciful Melody - 1 Mask restored");
                     }
                 }
             }
-
-            return damage;
         }
     }
 }

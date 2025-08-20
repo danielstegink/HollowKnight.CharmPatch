@@ -1,63 +1,20 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DanielSteginkUtils.Utilities;
+using Modding;
 
 namespace CharmPatch.OtherModHelpers
 {
     public static class CharmChanger
     {
         /// <summary>
-        /// Gets a Charm Changer setting via the save file
+        /// Gets a setting from Charm Changer
         /// </summary>
         /// <param name="saveIndex"></param>
         /// <param name="propertyName"></param>
         /// <returns></returns>
-        public static string GetProperty(int saveIndex, string propertyName)
+        public static O GetProperty<O>(string propertyName)
         {
-            try
-            {
-                // Get the mod data
-                string modData = SaveFile.GetModdedSaveFile(saveIndex);
-
-                // Convert the json string to a json object
-                JObject saveFile = JObject.Parse(modData);
-                if (saveFile == null)
-                {
-                    SharedData.Log("Save File JObject not found");
-                    return "0";
-                }
-
-                JToken token = saveFile["modData"];
-                if (token == null)
-                {
-                    SharedData.Log("modData JToken not found");
-                    return "0";
-                }
-
-                token = token["CharmChanger"];
-                if (token == null)
-                {
-                    SharedData.Log("CharmChanger JToken not found");
-                    return "0";
-                }
-
-                token = token[propertyName];
-                if (token == null)
-                {
-                    SharedData.Log($"{propertyName} JToken not found");
-                    return "0";
-                }
-
-                return token.ToString();
-            }
-            catch (Exception ex) // If this breaks, we probly don't have Pale Court installed
-            {
-                SharedData.Log($"Exception while checking Charm Changer: \n{ex.Message}\n{ex.StackTrace}");
-                return "0";
-            }
+            object saveSettings = ClassIntegrations.GetProperty<IMod, object>(SharedData.charmChangerMod, "LS");
+            return ClassIntegrations.GetField<object, O>(saveSettings, propertyName);
         }
     }
 }

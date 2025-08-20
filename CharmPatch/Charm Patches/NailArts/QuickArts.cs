@@ -1,86 +1,64 @@
-﻿namespace CharmPatch.Charm_Patches
+﻿using HKMirror.Reflection.SingletonClasses;
+using System;
+
+namespace CharmPatch.Charm_Patches
 {
-    public class QuickArts : CharmPatch
+    /// <summary>
+    /// Quick Arts reduces the charge time of Nail Arts when Quick Slash is equipped
+    /// </summary>
+    public class QuickArts : Patch
     {
-        /// <summary>
-        /// Tracks whether we've applied the buff or not
-        /// </summary>
-        private bool updated = false;
+        public bool IsActive => SharedData.globalSettings.quickArtsOn;
 
-        // Stores the Quick Slash modifier
-        private float modifier = 1.0f;
-
-        public void AddHook()
+        public void Start()
         {
-            On.HeroController.CharmUpdate += Start;
+            if (IsActive)
+            {
+                On.HeroController.CharmUpdate += BuffNailArts;
+            }
+        }
+
+        public void Stop()
+        {
+            On.HeroController.CharmUpdate -= BuffNailArts;
         }
 
         /// <summary>
-        /// Quick Arts makes Quick Slash reduce the cooldown of nail arts
+        /// The Nail Charge animation is handled by the HC in the Update method, but the actual time is set by CharmUpdate
         /// </summary>
         /// <param name="orig"></param>
         /// <param name="self"></param>
-        private void Start(On.HeroController.orig_CharmUpdate orig, HeroController self)
+        /// <exception cref="NotImplementedException"></exception>
+        private void BuffNailArts(On.HeroController.orig_CharmUpdate orig, HeroController self)
         {
-            if (SharedData.globalSettings.quickArtsOn && 
-                PlayerData.instance.equippedCharm_32 &&
-                !updated)
-            {
-                modifier = GetModifier(self);
-                self.NAIL_CHARGE_TIME_CHARM *= modifier;
-                self.NAIL_CHARGE_TIME_DEFAULT *= modifier;
-
-                updated = true;
-                //SharedData.Log($"Quick Arts: default charge time set to {self.NAIL_CHARGE_TIME_DEFAULT}, nmg time set to {self.NAIL_CHARGE_TIME_CHARM}");
-            }
-            else if ((!SharedData.globalSettings.quickArtsOn || !PlayerData.instance.equippedCharm_32) &&
-                        updated) // If updated and no longer enabled, reset
-            {
-                self.NAIL_CHARGE_TIME_CHARM /= modifier;
-                self.NAIL_CHARGE_TIME_DEFAULT /= modifier;
-
-                updated = false;
-                //SharedData.Log($"Quick Arts: default charge time reset to {self.NAIL_CHARGE_TIME_DEFAULT}, nmg time reset to {self.NAIL_CHARGE_TIME_CHARM}");
-            }
-
             orig(self);
 
-            // Manually set the charge time
-            //SharedData.Log($"Quick Arts: original charge time: {SharedData.GetField<HeroController, float>(self, "nailChargeTime")}");
-            if (PlayerData.instance.equippedCharm_26)
+            // Only modify the charge time if Quick Slash is equipped
+            if (PlayerData.instance.GetBool("equippedCharm_32"))
             {
-                SharedData.SetField(self, "nailChargeTime", self.NAIL_CHARGE_TIME_CHARM);
+                float modifier = GetModifier(self);
+                HeroControllerR.nailChargeTime *= modifier;
+                //CharmPatch.Instance.Log($"Quick Arts - Required time reduced by {modifier} to {HeroControllerR.nailChargeTime}");
             }
-            else
-            {
-                SharedData.SetField(self, "nailChargeTime", self.NAIL_CHARGE_TIME_DEFAULT);
-            }
-            //SharedData.Log($"Quick Arts: final charge time: {SharedData.GetField<HeroController, float>(self, "nailChargeTime")}");
         }
 
         /// <summary>
-        /// Gets the cooldown modifier of the Quick Slash charm
+        /// By default, Quick Slash reduces the cooldown time by 39%
         /// </summary>
         /// <param name="self"></param>
         /// <returns></returns>
         private float GetModifier(HeroController self)
         {
-            // By default, Quick Slash reduced cooldown time by 39%
-            float modifier = 0.61f;
-
-            // If Charm Changer is installed, get the cooldown times 
-            // it sets to determine that new Quick Slash modifier
-            if (SharedData.charmChangerInstalled)
+            // If Charm Changer is installed, get the cooldown times it sets to determine the new Quick Slash modifier
+            if (SharedData.charmChangerMod != null)
             {
-                float normalCooldown = self.ATTACK_COOLDOWN_TIME;
-                float charmCooldown = self.ATTACK_COOLDOWN_TIME_CH;
-                //SharedData.Log($"Normal attack: {normalCooldown}, Quick attack: {charmCooldown}");
-
-                modifier = charmCooldown / normalCooldown;
+                float normalCooldown = (float)SharedData.dataStore["nailCooldown"];
+                float charmCooldown = (float)SharedData.dataStore["quickSlashCooldown"];
+                //CharmPatch.Instance.Log($"Quick Arts - {charmCooldown} / {normalCooldown} = {charmCooldown / normalCooldown}");
+                return charmCooldown / normalCooldown;
             }
 
-            //SharedData.Log($"Quick Slash modifier: {modifier}");
-            return modifier;
+            return 0.61f;
         }
     }
 }

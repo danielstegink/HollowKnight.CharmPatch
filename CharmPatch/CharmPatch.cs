@@ -1,5 +1,6 @@
-﻿using CharmPatch.Charm_Patches;
+﻿using CharmPatch.OtherModHelpers;
 using Modding;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,7 +8,9 @@ namespace CharmPatch
 {
     public class CharmPatch : Mod, ICustomMenuMod, IGlobalSettings<GlobalSettings>
     {
-        public override string GetVersion() => "1.4.2.0";
+        public static CharmPatch Instance;
+
+        public override string GetVersion() => "1.5.0.0";
 
         public void OnLoadGlobal(GlobalSettings s)
         {
@@ -21,50 +24,66 @@ namespace CharmPatch
 
         public override void Initialize(Dictionary<string, Dictionary<string, GameObject>> preloadedObjects)
         {
-            //SharedData.Log("Starting mod");
+            Log("Initializing");
 
-            foreach (Charm_Patches.CharmPatch patch in SharedData.charmPatches)
+            Instance = this;
+
+            // Get the external mods
+            SharedData.unlimitedHivebloodMod = ModHooks.GetMod("UnlimitedHiveblood");
+            SharedData.exaltationMod = ModHooks.GetMod("Exaltation");
+            SharedData.charmChangerMod = ModHooks.GetMod("CharmChanger");
+
+            // Start the patches
+            StorePatchData();
+            foreach (Charm_Patches.Patch patch in SharedData.charmPatches)
             {
-                patch.AddHook();
+                patch.Start();
             }
 
-            // Check if Unlimited Hiveblood is installed so Blue Hive can decide whether to work or not
-            Charm_Patches.CharmPatch blueHive = SharedData.charmPatches[11];
-            if (blueHive is BlueHive)
-            {
-                ((BlueHive)blueHive).unlimitedHiveblood = ModHooks.GetMod("UnlimitedHiveblood");
-            }
+            ModHooks.SavegameSaveHook += OnSave;
 
-            // Check if Exaltation is installed; if so, Outer Shell can regenerate
-            Charm_Patches.CharmPatch outerShell = SharedData.charmPatches[3];
-            if (outerShell is OuterShell)
-            {
-                ((OuterShell)outerShell).exaltation = ModHooks.GetMod("Exaltation");
-            }
-
-            // Note if Charm Changer is installed
-            // If so, we will need to grab its settings
-            IMod charmChanger = ModHooks.GetMod("CharmChanger");
-            if (charmChanger != null)
-            {
-                SharedData.charmChangerInstalled = true;
-            }
-            //SharedData.Log($"Charm Changer installed: {SharedData.charmChangerInstalled}");
-
-            ModHooks.SavegameLoadHook += NewGame;
-
-            //SharedData.Log("Startup complete");
+            Log("Initialized");
         }
 
         /// <summary>
-        /// When a new game is loaded, we need to store the 
-        /// save file's index, in case we need to reference
-        /// data in the save file
+        /// Gets data related to patches, such as Charm Changer settings, and stores
+        /// it for ease of reference
         /// </summary>
-        /// <param name="saveIndex"></param>
-        private void NewGame(int saveIndex)
+        private void StorePatchData()
         {
-            SharedData.currentSave = saveIndex;
+            //Log("Storing external data");
+            Dictionary<string, object> cache = new Dictionary<string, object>
+            {
+                { "longnail", CharmChanger.GetProperty<int>("longnailScale") },
+                { "mop", CharmChanger.GetProperty<int>("markOfPrideScale") },
+                { "lnMop", CharmChanger.GetProperty<int>("longnailMarkOfPrideScale") },
+                { "strength", CharmChanger.GetProperty<int>("strengthDamageIncrease") },
+                { "hiveblood", CharmChanger.GetProperty<float>("hivebloodJonisTimer") },
+                { "dash", CharmChanger.GetProperty<float>("regularDashCooldown") },
+                { "dashmaster", CharmChanger.GetProperty<float>("dashmasterDashCooldown") },
+                { "stoneShellUnlocked", Exaltation.GetField<bool>("BaldurShellGlorified") },
+                { "nailCooldown", CharmChanger.GetProperty<float>("regularAttackCooldown") },
+                { "quickSlashCooldown", CharmChanger.GetProperty<float>("quickSlashAttackCooldown") },
+            };
+
+            SharedData.dataStore = cache;
+        }
+
+        /// <summary>
+        /// We will reset the patches when the player saves
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <exception cref="NotImplementedException"></exception>
+        private void OnSave(int obj)
+        {
+            StorePatchData();
+
+            Log("Resetting patches");
+            foreach (Charm_Patches.Patch patch in SharedData.charmPatches)
+            {
+                patch.Stop();
+                patch.Start();
+            }
         }
 
         #region Menu Options
