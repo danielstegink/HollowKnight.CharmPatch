@@ -47,6 +47,8 @@ Instead of using Merciful Melody, you can also increase Carefree Melody's block 
 ## Special Thanks To
 timbobaggins for the idea behind Critical Blow
 
+Nengyi-Jonathan-Jiang for noticing the performance issue with Charm Changer's integration
+
 ## Patch Notes
 1.5.0.0
 - Integrated with DanielSteginkUtils
