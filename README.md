@@ -48,6 +48,9 @@ Instead of using Merciful Melody, you can also increase Carefree Melody's block 
 timbobaggins for the idea behind Critical Blow
 
 ## Patch Notes
+1.5.1.0
+- Bug fix so game works without Charm Changer
+
 1.5.0.0
 - Integrated with DanielSteginkUtils
 - Added data caching between saves so patches don't slow down the game by checking external mod settings
