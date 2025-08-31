@@ -10,7 +10,7 @@ namespace CharmPatch
     {
         public static CharmPatch Instance;
 
-        public override string GetVersion() => "1.5.1.0";
+        public override string GetVersion() => "1.5.1.1";
 
         public void OnLoadGlobal(GlobalSettings s)
         {
@@ -52,23 +52,24 @@ namespace CharmPatch
         private void StorePatchData()
         {
             Log("Storing external data");
+            SharedData.dataStore = new Dictionary<string, object>();
+
             if (SharedData.charmChangerMod != null)
             {
-                Dictionary<string, object> cache = new Dictionary<string, object>
-                {
-                    { "longnail", CharmChanger.GetProperty<int>("longnailScale") },
-                    { "mop", CharmChanger.GetProperty<int>("markOfPrideScale") },
-                    { "lnMop", CharmChanger.GetProperty<int>("longnailMarkOfPrideScale") },
-                    { "strength", CharmChanger.GetProperty<int>("strengthDamageIncrease") },
-                    { "hiveblood", CharmChanger.GetProperty<float>("hivebloodJonisTimer") },
-                    { "dash", CharmChanger.GetProperty<float>("regularDashCooldown") },
-                    { "dashmaster", CharmChanger.GetProperty<float>("dashmasterDashCooldown") },
-                    { "stoneShellUnlocked", Exaltation.GetField<bool>("BaldurShellGlorified") },
-                    { "nailCooldown", CharmChanger.GetProperty<float>("regularAttackCooldown") },
-                    { "quickSlashCooldown", CharmChanger.GetProperty<float>("quickSlashAttackCooldown") },
-                };
+                SharedData.dataStore.Add("longnail", CharmChanger.GetProperty<int>("longnailScale"));
+                SharedData.dataStore.Add("mop", CharmChanger.GetProperty<int>("markOfPrideScale"));
+                SharedData.dataStore.Add("lnMop", CharmChanger.GetProperty<int>("longnailMarkOfPrideScale"));
+                SharedData.dataStore.Add("strength", CharmChanger.GetProperty<int>("strengthDamageIncrease"));
+                SharedData.dataStore.Add("hiveblood", CharmChanger.GetProperty<float>("hivebloodJonisTimer"));
+                SharedData.dataStore.Add("dash", CharmChanger.GetProperty<float>("regularDashCooldown"));
+                SharedData.dataStore.Add("dashmaster", CharmChanger.GetProperty<float>("dashmasterDashCooldown"));
+                SharedData.dataStore.Add("nailCooldown", CharmChanger.GetProperty<float>("regularAttackCooldown"));
+                SharedData.dataStore.Add("quickSlashCooldown", CharmChanger.GetProperty<float>("quickSlashAttackCooldown"));
+            }
 
-                SharedData.dataStore = cache;
+            if (SharedData.exaltationMod != null)
+            {
+                SharedData.dataStore.Add("stoneShellUnlocked", Exaltation.GetField<bool>("BaldurShellGlorified"));
             }
         }
 
