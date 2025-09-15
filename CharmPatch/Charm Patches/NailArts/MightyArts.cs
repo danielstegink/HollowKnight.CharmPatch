@@ -1,5 +1,4 @@
-﻿using CharmPatch.OtherModHelpers;
-using DanielSteginkUtils.Utilities;
+﻿using DanielSteginkUtils.Utilities;
 
 namespace CharmPatch.Charm_Patches
 {
@@ -49,7 +48,8 @@ namespace CharmPatch.Charm_Patches
         /// <returns></returns>
         private float GetModifier()
         {
-            if (SharedData.charmChangerMod != null)
+            if (SharedData.charmChangerMod != null &&
+                SharedData.globalSettings.charmChangerOn)
             {
                 int scale = (int)SharedData.dataStore["strength"];
                 return 1 + (float)scale / 100;

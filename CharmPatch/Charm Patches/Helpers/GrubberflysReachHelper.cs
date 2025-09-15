@@ -1,5 +1,4 @@
-﻿using CharmPatch.OtherModHelpers;
-using DanielSteginkUtils.Components.Dung;
+﻿using DanielSteginkUtils.Components.Dung;
 using DanielSteginkUtils.Helpers.Charms.Elegy;
 using UnityEngine;
 
@@ -37,7 +36,8 @@ namespace CharmPatch.Charm_Patches.Helpers
             if (PlayerData.instance.GetBool("equippedCharm_18") &&
                 !PlayerData.instance.GetBool("equippedCharm_13"))
             {
-                if (SharedData.charmChangerMod != null)
+                if (SharedData.charmChangerMod != null &&
+                    SharedData.globalSettings.charmChangerOn)
                 {
                     int scale = (int)SharedData.dataStore["longnail"];
                     return 1 + (float)scale / 100;
@@ -56,7 +56,8 @@ namespace CharmPatch.Charm_Patches.Helpers
                     return 1f;
                 }
 
-                if (SharedData.charmChangerMod != null)
+                if (SharedData.charmChangerMod != null &&
+                    SharedData.globalSettings.charmChangerOn)
                 {
                     int scale = (int)SharedData.dataStore["mop"];
                     return 1 + (float)scale / 100;
@@ -73,7 +74,8 @@ namespace CharmPatch.Charm_Patches.Helpers
                 // In that case, we want to multiply the 25% already applied to reach 40%
                 if (direction.Equals("UP"))
                 {
-                    if (SharedData.charmChangerMod != null)
+                    if (SharedData.charmChangerMod != null &&
+                        SharedData.globalSettings.charmChangerOn)
                     {
                         int mopScale = (int)SharedData.dataStore["mop"];
                         int bothScale = (int)SharedData.dataStore["lnMop"];
@@ -85,7 +87,8 @@ namespace CharmPatch.Charm_Patches.Helpers
                     return 1.4f / 1.25f;
                 }
 
-                if (SharedData.charmChangerMod != null)
+                if (SharedData.charmChangerMod != null &&
+                    SharedData.globalSettings.charmChangerOn)
                 {
                     int scale = (int)SharedData.dataStore["lnMop"];
                     return 1 + (float)scale / 100;

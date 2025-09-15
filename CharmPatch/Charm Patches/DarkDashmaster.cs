@@ -58,7 +58,8 @@ namespace CharmPatch.Charm_Patches
         /// <returns></returns>
         private float GetModifier()
         {
-            if (SharedData.charmChangerMod != null)
+            if (SharedData.charmChangerMod != null &&
+                SharedData.globalSettings.charmChangerOn)
             {
                 float dashCooldown = (float)SharedData.dataStore["dash"];
                 float dashmasterCooldown = (float)SharedData.dataStore["dashmaster"];

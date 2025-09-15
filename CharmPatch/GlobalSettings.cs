@@ -17,5 +17,6 @@
         public bool quickArtsOn = true;
 
         public bool blueHiveOn = true;
+        public bool charmChangerOn = true;
     }
 }

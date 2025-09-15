@@ -135,7 +135,12 @@ namespace CharmPatch
                     "TheMathGeek314's Unlimited Hiveblood restores Lifeblood Masks",
                     MenuValues(),
                     value => SharedData.globalSettings.blueHiveOn = Convert.ToBoolean(value),
-                    () => Convert.ToInt32(SharedData.globalSettings.blueHiveOn))
+                    () => Convert.ToInt32(SharedData.globalSettings.blueHiveOn)),
+                new HorizontalOption("Charm Changer",
+                    "Uses settings from Exempt-Medic's Charm Changer",
+                    MenuValues(),
+                    value => SharedData.globalSettings.charmChangerOn = Convert.ToBoolean(value),
+                    () => Convert.ToInt32(SharedData.globalSettings.charmChangerOn))
             });
             subMenus.Add("Mod Integrations", otherModMenu.GetMenuScreen(menuScreen));
         }

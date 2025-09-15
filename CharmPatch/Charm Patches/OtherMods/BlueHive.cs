@@ -129,7 +129,8 @@ namespace CharmPatch.Charm_Patches
         /// <returns></returns>
         private float GetTimeout()
         {
-            if (SharedData.charmChangerMod != null)
+            if (SharedData.charmChangerMod != null &&
+                SharedData.globalSettings.charmChangerOn)
             {
                 return (float)SharedData.dataStore["hiveblood"];
             }

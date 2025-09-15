@@ -50,7 +50,8 @@ namespace CharmPatch.Charm_Patches
         private float GetModifier(HeroController self)
         {
             // If Charm Changer is installed, get the cooldown times it sets to determine the new Quick Slash modifier
-            if (SharedData.charmChangerMod != null)
+            if (SharedData.charmChangerMod != null &&
+                SharedData.globalSettings.charmChangerOn)
             {
                 float normalCooldown = (float)SharedData.dataStore["nailCooldown"];
                 float charmCooldown = (float)SharedData.dataStore["quickSlashCooldown"];

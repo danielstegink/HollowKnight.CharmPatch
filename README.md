@@ -32,6 +32,8 @@ Quick Arts - Quick Slash reduces the charge time of Nail Arts
 
 Blue Hive - TheMathGeek314's Unlimited Hiveblood mod heals Lifeblood Masks given by Joni's Blessing in addition to regular ones.
 
+Charm Changer - Whether or not Charm Patch uses settings from Exempt-Medic's Charm Changer mod.
+
 ## Recommended Charm Changer Settings
 
 Set Flukenest cost to 2
@@ -50,6 +52,9 @@ timbobaggins for the idea behind Critical Blow
 Nengyi-Jonathan-Jiang and Evan Mitchell for testing and feedback
 
 ## Patch Notes
+1.5.2.0
+- Modified so Charm Changer is an optional setting
+
 1.5.1.1
 - Bug fix so game works without Exaltation
 

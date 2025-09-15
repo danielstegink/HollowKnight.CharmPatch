@@ -1,5 +1,4 @@
-﻿using CharmPatch.OtherModHelpers;
-using DanielSteginkUtils.Components;
+﻿using DanielSteginkUtils.Components;
 using DanielSteginkUtils.Helpers.Attributes;
 using UnityEngine;
 
@@ -36,7 +35,8 @@ namespace CharmPatch.Charm_Patches.Helpers
             if (PlayerData.instance.GetBool("equippedCharm_18") &&
                 !PlayerData.instance.GetBool("equippedCharm_13"))
             {
-                if (SharedData.charmChangerMod != null)
+                if (SharedData.charmChangerMod != null &&
+                    SharedData.globalSettings.charmChangerOn)
                 {
                     int scale = (int)SharedData.dataStore["longnail"];
                     return 1 + (float)scale / 100;
@@ -49,7 +49,8 @@ namespace CharmPatch.Charm_Patches.Helpers
             if (!PlayerData.instance.GetBool("equippedCharm_18") &&
                 PlayerData.instance.GetBool("equippedCharm_13"))
             {
-                if (SharedData.charmChangerMod != null)
+                if (SharedData.charmChangerMod != null &&
+                    SharedData.globalSettings.charmChangerOn)
                 {
                     int scale = (int)SharedData.dataStore["mop"];
                     return 1 + (float)scale / 100;
@@ -62,7 +63,8 @@ namespace CharmPatch.Charm_Patches.Helpers
             if (PlayerData.instance.GetBool("equippedCharm_18") &&
                 PlayerData.instance.GetBool("equippedCharm_13"))
             {
-                if (SharedData.charmChangerMod != null)
+                if (SharedData.charmChangerMod != null &&
+                    SharedData.globalSettings.charmChangerOn)
                 {
                     int scale = (int)SharedData.dataStore["lnMop"];
                     return 1 + (float)scale / 100;

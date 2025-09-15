@@ -10,7 +10,7 @@ namespace CharmPatch
     {
         public static CharmPatch Instance;
 
-        public override string GetVersion() => "1.5.1.1";
+        public override string GetVersion() => "1.5.2.0";
 
         public void OnLoadGlobal(GlobalSettings s)
         {

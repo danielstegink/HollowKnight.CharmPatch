@@ -1,5 +1,4 @@
-﻿using CharmPatch.OtherModHelpers;
-using Modding;
+﻿using Modding;
 using System.Collections;
 using UnityEngine;
 
