@@ -15,17 +15,8 @@ namespace CharmPatch.Charm_Patches
 
         public void Start()
         {
-            if (IsActive)
-            {
-                On.HeroController.TakeDamage += StartHealing;
-                ModHooks.CharmUpdateHook += Reset;
-            }
-        }
-
-        public void Stop()
-        {
-            On.HeroController.TakeDamage -= StartHealing;
-            ModHooks.CharmUpdateHook -= Reset;
+            On.HeroController.TakeDamage += StartHealing;
+            ModHooks.CharmUpdateHook += Reset;
         }
 
         /// <summary>
@@ -90,25 +81,28 @@ namespace CharmPatch.Charm_Patches
             // If already healed, skip
             if (PlayerData.instance.GetInt("healthBlue") >= PlayerData.instance.GetInt("joniHealthBlue"))
             {
-                //CharmPatch.Instance.Log($"Blue Hive - {PlayerData.instance.GetInt("healthBlue")} is more than {PlayerData.instance.GetInt("joniHealthBlue")}");
+                //CharmPatch.Instance.Log($"Blue Hive - Already healed");
                 return false;
             }
 
             // If the patch is not enabled, skip
             if (!IsActive)
             {
+                //CharmPatch.Instance.Log($"Blue Hive - Patch not active");
                 return false;
             }
 
             // Cancel if Blue Hive has been reset
             if (!blueHiveActive)
             {
+                //CharmPatch.Instance.Log($"Blue Hive - Patch reset");
                 return false;
             }
 
             // If TheMathGeek314's Unlimited Hiveblood mod isn't installed, skip
             if (SharedData.unlimitedHivebloodMod == null)
             {
+                //CharmPatch.Instance.Log($"Blue Hive - Unlimited Hiveblood not installed");
                 return false;
             }
 
@@ -116,6 +110,7 @@ namespace CharmPatch.Charm_Patches
             if (!PlayerData.instance.GetBool("equippedCharm_36") || 
                 !PlayerData.instance.GetBool("equippedCharm_29"))
             {
+                //CharmPatch.Instance.Log($"Blue Hive - Charms not equipped");
                 return false;
             }
 

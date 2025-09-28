@@ -14,15 +14,7 @@ namespace CharmPatch.Charm_Patches
 
         public void Start()
         {
-            if (IsActive)
-            {
-                On.HeroController.Attack += KeepGrubberfly;
-            }
-        }
-
-        public void Stop()
-        {
-            On.HeroController.Attack -= KeepGrubberfly;
+            On.HeroController.Attack += KeepGrubberfly;
         }
 
         /// <summary>
@@ -34,16 +26,19 @@ namespace CharmPatch.Charm_Patches
         /// <exception cref="NotImplementedException"></exception>
         private void KeepGrubberfly(On.HeroController.orig_Attack orig, HeroController self, AttackDirection attackDir)
         {
-            //CharmPatch.Instance.Log($"Current health: {PlayerData.instance.GetInt("healthBlue")} out of {PlayerData.instance.GetInt("joniHealthBlue")}");
-            if (PlayerData.instance.GetInt("healthBlue") >= PlayerData.instance.GetInt("joniHealthBlue"))
+            if (IsActive)
             {
-                HeroControllerR.joniBeam = true;
-                //CharmPatch.Instance.Log("Joni enabled");
-            }
-            else if (PlayerData.instance.GetInt("healthBlue") < PlayerData.instance.GetInt("joniHealthBlue"))
-            {
-                HeroControllerR.joniBeam = false;
-                //CharmPatch.Instance.Log("Joni disabled");
+                //CharmPatch.Instance.Log($"Current health: {PlayerData.instance.GetInt("healthBlue")} out of {PlayerData.instance.GetInt("joniHealthBlue")}");
+                if (PlayerData.instance.GetInt("healthBlue") >= PlayerData.instance.GetInt("joniHealthBlue"))
+                {
+                    HeroControllerR.joniBeam = true;
+                    //CharmPatch.Instance.Log("Joni enabled");
+                }
+                else if (PlayerData.instance.GetInt("healthBlue") < PlayerData.instance.GetInt("joniHealthBlue"))
+                {
+                    HeroControllerR.joniBeam = false;
+                    //CharmPatch.Instance.Log("Joni disabled");
+                }
             }
 
             orig(self, attackDir);

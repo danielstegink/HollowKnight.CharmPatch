@@ -8,13 +8,8 @@
         public bool IsActive { get; }
 
         /// <summary>
-        /// Starts the patch
+        /// Starts the patch. Called on mod initialization
         /// </summary>
         public void Start();
-
-        /// <summary>
-        /// Stops the patch
-        /// </summary>
-        public void Stop();
     }
 }

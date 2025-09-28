@@ -14,15 +14,7 @@ namespace CharmPatch.Charm_Patches
 
         public void Start()
         {
-            if (IsActive)
-            {
-                On.HeroController.TakeDamage += Heal;
-            }
-        }
-
-        public void Stop()
-        {
-            On.HeroController.TakeDamage -= Heal;
+            On.HeroController.TakeDamage += Heal;
         }
 
         /// <summary>
@@ -40,14 +32,15 @@ namespace CharmPatch.Charm_Patches
         private void Heal(On.HeroController.orig_TakeDamage orig, HeroController self, GameObject go, CollisionSide damageSide, int damageAmount, int hazardType)
         {
             // We don't want to repeatedly trigger while I-Frames are active
-            // So we check before hand if we could've even taken damage
+            // So we check beforehand if we could've even taken damage
             // But we have to check before the call, or I-Frames will be active and we'll get a false negative
             bool canTakeDamage = HeroControllerR.CanTakeDamage();
             orig(self, go, damageSide, damageAmount, hazardType);
 
             // Only trigger when Carefree Melody blocks
             GameObject shield = HeroController.instance.carefreeShield;
-            if (shield != null &&
+            if (IsActive && 
+                shield != null &&
                 shield.activeSelf)
             {
                 // Verify that we even have damage to heal and that

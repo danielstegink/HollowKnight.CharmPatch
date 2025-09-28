@@ -13,17 +13,8 @@ namespace CharmPatch.Charm_Patches
 
         public void Start()
         {
-            if (IsActive)
-            {
-                ModHooks.TakeHealthHook += Start;
-                On.PlayerData.MaxHealth += Refresh;
-            }
-        }
-
-        public void Stop()
-        {
-            ModHooks.TakeHealthHook -= Start;
-            On.PlayerData.MaxHealth -= Refresh;
+            ModHooks.TakeHealthHook += Start;
+            On.PlayerData.MaxHealth += Refresh;
         }
 
         /// <summary>
@@ -46,7 +37,8 @@ namespace CharmPatch.Charm_Patches
         /// <returns></returns>
         private int Start(int damage)
         {
-            if (extraHitsTaken < extraHits &&
+            if (IsActive && 
+                extraHitsTaken < extraHits &&
                 PlayerData.instance.GetBool("equippedCharm_5"))
             {
                 PlayerData.instance.IntAdd("blockerHits", 1);

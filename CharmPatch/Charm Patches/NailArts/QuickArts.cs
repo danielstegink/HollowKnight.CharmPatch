@@ -12,15 +12,7 @@ namespace CharmPatch.Charm_Patches
 
         public void Start()
         {
-            if (IsActive)
-            {
-                On.HeroController.CharmUpdate += BuffNailArts;
-            }
-        }
-
-        public void Stop()
-        {
-            On.HeroController.CharmUpdate -= BuffNailArts;
+            On.HeroController.CharmUpdate += BuffNailArts;
         }
 
         /// <summary>
@@ -34,7 +26,8 @@ namespace CharmPatch.Charm_Patches
             orig(self);
 
             // Only modify the charge time if Quick Slash is equipped
-            if (PlayerData.instance.GetBool("equippedCharm_32"))
+            if (IsActive && 
+                PlayerData.instance.GetBool("equippedCharm_32"))
             {
                 float modifier = GetModifier(self);
                 HeroControllerR.nailChargeTime *= modifier;

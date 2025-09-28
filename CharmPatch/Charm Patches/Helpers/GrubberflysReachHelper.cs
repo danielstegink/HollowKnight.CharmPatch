@@ -1,6 +1,4 @@
-﻿using DanielSteginkUtils.Components.Dung;
-using DanielSteginkUtils.Helpers.Charms.Elegy;
-using UnityEngine;
+﻿using DanielSteginkUtils.Helpers.Charms.Elegy;
 
 namespace CharmPatch.Charm_Patches.Helpers
 {
@@ -10,27 +8,14 @@ namespace CharmPatch.Charm_Patches.Helpers
     public class GrubberflysReachHelper : ElegyBeamRangeHelper
     {
         public GrubberflysReachHelper(bool performLogging = false) :
-            base(CharmPatch.Instance.Name, "Grubberfly's Elegy", 1f, performLogging) { }
-
-        public override void ApplyBuff(GameObject gameObject, BuffElegyRange modsApplied)
-        {
-            string direction = GetDirection(gameObject.name);
-            float customModifier = GetModifier(direction);
-            modsApplied.ModList[modName][featureName] = customModifier;
-            if (performLogging)
-            {
-                CharmPatch.Instance.Log($"Grubberfly's Reach - Range modifier {modsApplied.ModList[modName][featureName]}");
-            }
-
-            base.ApplyBuff(gameObject, modsApplied);
-        }
+            base(CharmPatch.Instance.Name, "Grubberfly's Elegy", performLogging) { }
 
         /// <summary>
         /// Gets how much to increase the beam's range by
         /// </summary>
         /// <param name="direction"></param>
         /// <returns></returns>
-        private float GetModifier(string direction)
+        public override float GetModifier(string direction)
         {
             // If Longnail is equipped, we want to increase the range by 15%
             if (PlayerData.instance.GetBool("equippedCharm_18") &&

@@ -140,7 +140,12 @@ namespace CharmPatch
                     "Uses settings from Exempt-Medic's Charm Changer",
                     MenuValues(),
                     value => SharedData.globalSettings.charmChangerOn = Convert.ToBoolean(value),
-                    () => Convert.ToInt32(SharedData.globalSettings.charmChangerOn))
+                    () => Convert.ToInt32(SharedData.globalSettings.charmChangerOn)),
+                new HorizontalOption("Mark of Purity Restored",
+                    "Compatibility patch for Pale Court and Charm Changer",
+                    MenuValues(),
+                    value => SharedData.globalSettings.mopRestoredOn = Convert.ToBoolean(value),
+                    () => Convert.ToInt32(SharedData.globalSettings.mopRestoredOn))
             });
             subMenus.Add("Mod Integrations", otherModMenu.GetMenuScreen(menuScreen));
         }

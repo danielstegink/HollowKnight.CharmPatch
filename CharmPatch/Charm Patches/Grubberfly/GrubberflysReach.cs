@@ -11,22 +11,36 @@ namespace CharmPatch.Charm_Patches
 
         public void Start()
         {
-            if (IsActive)
-            {
-                helper = new GrubberflysReachHelper();
-                helper.Start();
-            }
+            On.HeroController.CharmUpdate += OnCharmUpdate;
         }
 
-        public void Stop()
+        /// <summary>
+        /// This patch starts a coroutine if the right charms are equipped, so we can check whenever charms are updated
+        /// </summary>
+        /// <param name="orig"></param>
+        /// <param name="self"></param>
+        private void OnCharmUpdate(On.HeroController.orig_CharmUpdate orig, HeroController self)
         {
+            orig(self);
+
             if (helper != null)
             {
                 helper.Stop();
             }
+
+            // If the patch is inactive or if it won't do anything, then there's no need to strain the machine
+            if (IsActive &&
+                (PlayerData.instance.GetBool("equippedCharm_18") ||
+                    PlayerData.instance.GetBool("equippedCharm_13")))
+            {
+                helper = new GrubberflysReachHelper(true);
+                helper.Start();
+            }
         }
 
+        /// <summary>
+        /// Utils helper
+        /// </summary>
         private GrubberflysReachHelper helper;
-
     }
 }

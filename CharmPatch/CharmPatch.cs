@@ -10,7 +10,7 @@ namespace CharmPatch
     {
         public static CharmPatch Instance;
 
-        public override string GetVersion() => "1.5.2.0";
+        public override string GetVersion() => "1.6.0.0";
 
         public void OnLoadGlobal(GlobalSettings s)
         {
@@ -32,6 +32,8 @@ namespace CharmPatch
             SharedData.unlimitedHivebloodMod = ModHooks.GetMod("UnlimitedHiveblood");
             SharedData.exaltationMod = ModHooks.GetMod("Exaltation");
             SharedData.charmChangerMod = ModHooks.GetMod("CharmChanger");
+            SharedData.paleCourtMod = ModHooks.GetMod("Pale Court");
+            SharedData.pcCharmsMod = ModHooks.GetMod("PaleCourtCharms");
 
             // Start the patches
             StorePatchData();
@@ -51,7 +53,7 @@ namespace CharmPatch
         /// </summary>
         private void StorePatchData()
         {
-            Log("Storing external data");
+            //Log("Storing external data");
             SharedData.dataStore = new Dictionary<string, object>();
 
             if (SharedData.charmChangerMod != null)
@@ -81,13 +83,6 @@ namespace CharmPatch
         private void OnSave(int obj)
         {
             StorePatchData();
-
-            Log("Resetting patches");
-            foreach (Charm_Patches.Patch patch in SharedData.charmPatches)
-            {
-                patch.Stop();
-                patch.Start();
-            }
         }
 
         #region Menu Options

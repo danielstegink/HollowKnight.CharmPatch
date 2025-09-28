@@ -1,4 +1,5 @@
-﻿using DanielSteginkUtils.Helpers.Abilities;
+﻿using CharmPatch.Charm_Patches.Helpers;
+using DanielSteginkUtils.Helpers.Abilities;
 using System;
 
 namespace CharmPatch.Charm_Patches
@@ -12,39 +13,29 @@ namespace CharmPatch.Charm_Patches
 
         public void Start()
         {
-            if (IsActive)
-            {
-                On.HeroController.Start += StartDashHelper;
-
-                if (HeroController.instance != null)
-                {
-                    helper = new DashHelper(1f, GetModifier());
-                    helper.Start();
-                }
-            }
+            On.HeroController.CharmUpdate += OnCharmUpdate;
         }
 
-        public void Stop()
+        /// <summary>
+        /// Check each time charms update, since we only need to run if Dashmaster is equipped
+        /// </summary>
+        /// <param name="orig"></param>
+        /// <param name="self"></param>
+        private void OnCharmUpdate(On.HeroController.orig_CharmUpdate orig, HeroController self)
         {
-            On.HeroController.Start -= StartDashHelper;
+            orig(self);
 
             if (helper != null)
             {
                 helper.Stop();
             }
-        }
 
-        /// <summary>
-        /// DashHelper modifies the HeroController, so we should only initialize it when the HeroController has started
-        /// </summary>
-        /// <param name="orig"></param>
-        /// <param name="self"></param>
-        private void StartDashHelper(On.HeroController.orig_Start orig, HeroController self)
-        {
-            orig(self);
-
-            helper = new DashHelper(1f, GetModifier());
-            helper.Start();
+            if (IsActive &&
+                PlayerData.instance.GetBool("equippedCharm_31"))
+            {
+                helper = new DashHelper(1f, GetModifier());
+                helper.Start();
+            }
         }
 
         /// <summary>

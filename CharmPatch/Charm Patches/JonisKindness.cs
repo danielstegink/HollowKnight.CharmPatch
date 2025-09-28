@@ -9,22 +9,20 @@
 
         public void Start()
         {
-            if (IsActive)
-            {
-                On.HeroController.CharmUpdate += BuffHealth;
-            }
+            On.HeroController.CharmUpdate += BuffHealth;
         }
 
-        public void Stop()
-        {
-            On.HeroController.CharmUpdate -= BuffHealth;
-        }
-
+        /// <summary>
+        /// The best time to adjust health is after sitting at a bench
+        /// </summary>
+        /// <param name="orig"></param>
+        /// <param name="self"></param>
         private void BuffHealth(On.HeroController.orig_CharmUpdate orig, HeroController self)
         {
             orig(self);
 
-            if (PlayerData.instance.GetBool("equippedCharm_27"))
+            if (IsActive &&
+                PlayerData.instance.GetBool("equippedCharm_27"))
             {
                 PlayerData.instance.IntAdd("joniHealthBlue", 2);
                 //CharmPatch.Instance.Log($"Joni's Kindness - Blue health increased to {PlayerData.instance.GetInt("joniHealthBlue")}");

@@ -28,6 +28,16 @@ namespace CharmPatch
         /// Exaltation
         /// </summary>
         public static IMod exaltationMod;
+
+        /// <summary>
+        /// Pale Court
+        /// </summary>
+        public static IMod paleCourtMod;
+
+        /// <summary>
+        /// Pale Court Charms
+        /// </summary>
+        public static IMod pcCharmsMod;
         #endregion
 
         /// <summary>
@@ -50,6 +60,7 @@ namespace CharmPatch
             new QuickArts(),
 
             new BlueHive(),
+            new MopRestored(),
         };
 
         /// <summary>

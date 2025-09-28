@@ -34,6 +34,9 @@ Blue Hive - TheMathGeek314's Unlimited Hiveblood mod heals Lifeblood Masks given
 
 Charm Changer - Whether or not Charm Patch uses settings from Exempt-Medic's Charm Changer mod.
 
+Mark of Purity Restored - Compatibility patch that makes it so that Charm Changer is compatible 
+with Pale Court's Mark of Purity.
+
 ## Recommended Charm Changer Settings
 
 Set Flukenest cost to 2
@@ -49,9 +52,15 @@ Instead of using Merciful Melody, you can also increase Carefree Melody's block 
 ## Special Thanks To
 timbobaggins for the idea behind Critical Blow
 
-Nengyi-Jonathan-Jiang and Evan Mitchell for testing and feedback
+Nengyi-Jonathan-Jiang, toffee05, ForkinIsaac and Evan Mitchell for testing and feedback
+
+The Pale Court community for their phenomenal work and for their permission to use MOP's code to write the Restored patch.
 
 ## Patch Notes
+1.6.0.0
+- Reorganized to reduce hardware strain
+- New patch: Mark of Purity Restored
+
 1.5.2.0
 - Modified so Charm Changer is an optional setting
 

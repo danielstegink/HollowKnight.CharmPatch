@@ -11,18 +11,28 @@ namespace CharmPatch.Charm_Patches
 
         public void Start()
         {
-            if (IsActive)
-            {
-                helper = new FuryShield();
-                helper.Start();
-            }
+            On.HeroController.CharmUpdate += OnCharmUpdate;
         }
 
-        public void Stop()
+        /// <summary>
+        /// We want to reset whenever charms are updated, since we only want to run if FOTF is equipped
+        /// </summary>
+        /// <param name="orig"></param>
+        /// <param name="self"></param>
+        private void OnCharmUpdate(On.HeroController.orig_CharmUpdate orig, HeroController self)
         {
+            orig(self);
+
             if (helper != null)
             {
                 helper.Stop();
+            }
+
+            if (IsActive &&
+                PlayerData.instance.GetBool("equippedCharm_6"))
+            {
+                helper = new FuryShield();
+                helper.Start();
             }
         }
 

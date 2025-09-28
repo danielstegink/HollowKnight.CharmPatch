@@ -11,15 +11,7 @@ namespace CharmPatch.Charm_Patches
 
         public void Start()
         {
-            if (IsActive)
-            {
-                On.HealthManager.TakeDamage += BuffNailArts;
-            }
-        }
-
-        public void Stop()
-        {
-            On.HealthManager.TakeDamage -= BuffNailArts;
+            On.HealthManager.TakeDamage += BuffNailArts;
         }
 
         /// <summary>
@@ -30,7 +22,8 @@ namespace CharmPatch.Charm_Patches
         /// <param name="hitInstance"></param>
         private void BuffNailArts(On.HealthManager.orig_TakeDamage orig, HealthManager self, HitInstance hitInstance)
         {
-            if (PlayerData.instance.GetBool("equippedCharm_25") &&
+            if (IsActive &&
+                PlayerData.instance.GetBool("equippedCharm_25") &&
                 Logic.IsNailArt(hitInstance.Source.name))
             {
                 float modifier = GetModifier();

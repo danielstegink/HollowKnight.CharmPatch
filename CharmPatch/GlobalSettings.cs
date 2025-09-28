@@ -18,5 +18,6 @@
 
         public bool blueHiveOn = true;
         public bool charmChangerOn = true;
+        public bool mopRestoredOn = true;
     }
 }
