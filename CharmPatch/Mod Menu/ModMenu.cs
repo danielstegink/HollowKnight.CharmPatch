@@ -145,7 +145,12 @@ namespace CharmPatch
                     "Compatibility patch for Pale Court and Charm Changer",
                     MenuValues(),
                     value => SharedData.globalSettings.mopRestoredOn = Convert.ToBoolean(value),
-                    () => Convert.ToInt32(SharedData.globalSettings.mopRestoredOn))
+                    () => Convert.ToInt32(SharedData.globalSettings.mopRestoredOn)),
+                new HorizontalOption("Friendly Aspid",
+                    "Nickc01's Aspid Aspect won't damage the player",
+                    MenuValues(),
+                    value => SharedData.globalSettings.friendlyAspidOn = Convert.ToBoolean(value),
+                    () => Convert.ToInt32(SharedData.globalSettings.friendlyAspidOn))
             });
             subMenus.Add("Mod Integrations", otherModMenu.GetMenuScreen(menuScreen));
         }

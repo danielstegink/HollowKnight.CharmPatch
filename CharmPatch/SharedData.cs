@@ -38,6 +38,11 @@ namespace CharmPatch
         /// Pale Court Charms
         /// </summary>
         public static IMod pcCharmsMod;
+
+        /// <summary>
+        /// Ancient Aspid
+        /// </summary>
+        public static IMod ancientAspidMod;
         #endregion
 
         /// <summary>
@@ -61,6 +66,7 @@ namespace CharmPatch
 
             new BlueHive(),
             new MopRestored(),
+            new FriendlyAspid(),
         };
 
         /// <summary>

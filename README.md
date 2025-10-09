@@ -37,6 +37,8 @@ Charm Changer - Whether or not Charm Patch uses settings from Exempt-Medic's Cha
 Mark of Purity Restored - Compatibility patch that makes it so that Charm Changer is compatible 
 with Pale Court's Mark of Purity.
 
+Friendly Aspid - Makes it so that the Aspid Aspect charm from Nickc01's Ancient Aspid mod doesn't damage the player.
+
 ## Recommended Charm Changer Settings
 
 Set Flukenest cost to 2
@@ -57,6 +59,9 @@ Nengyi-Jonathan-Jiang, toffee05, ForkinIsaac and Evan Mitchell for testing and f
 The Pale Court community for their phenomenal work and for their permission to use MOP's code to write the Restored patch.
 
 ## Patch Notes
+1.7.0.0
+- New patch: Friendly Aspid
+
 1.6.0.0
 - Reorganized to reduce hardware strain
 - New patch: Mark of Purity Restored

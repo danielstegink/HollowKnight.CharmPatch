@@ -10,7 +10,7 @@ namespace CharmPatch
     {
         public static CharmPatch Instance;
 
-        public override string GetVersion() => "1.6.0.0";
+        public override string GetVersion() => "1.7.0.0";
 
         public void OnLoadGlobal(GlobalSettings s)
         {
@@ -34,6 +34,7 @@ namespace CharmPatch
             SharedData.charmChangerMod = ModHooks.GetMod("CharmChanger");
             SharedData.paleCourtMod = ModHooks.GetMod("Pale Court");
             SharedData.pcCharmsMod = ModHooks.GetMod("PaleCourtCharms");
+            SharedData.ancientAspidMod = ModHooks.GetMod("AncientAspid");
 
             // Start the patches
             StorePatchData();
