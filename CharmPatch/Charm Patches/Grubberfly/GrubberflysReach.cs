@@ -33,7 +33,7 @@ namespace CharmPatch.Charm_Patches
                 (PlayerData.instance.GetBool("equippedCharm_18") ||
                     PlayerData.instance.GetBool("equippedCharm_13")))
             {
-                helper = new GrubberflysReachHelper(true);
+                helper = new GrubberflysReachHelper();
                 helper.Start();
             }
         }

@@ -59,6 +59,9 @@ Nengyi-Jonathan-Jiang, toffee05, ForkinIsaac and Evan Mitchell for testing and f
 The Pale Court community for their phenomenal work and for their permission to use MOP's code to write the Restored patch.
 
 ## Patch Notes
+1.7.0.1
+- Disabled logging for Grubberfly's Reach
+
 1.7.0.0
 - New patch: Friendly Aspid
 
